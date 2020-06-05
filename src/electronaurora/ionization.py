@@ -326,7 +326,7 @@ def fang2010_maxw_int(energy, flux, scale_height, rho, bounds=(0.1, 300.), nstep
 		Number of integration steps, default: 128.
 	"""
 	bounds_l10 = np.log10(bounds)
-	ens = np.logspace(*bounds_l10, nstep)
+	ens = np.logspace(*bounds_l10, num=nstep)
 	dflux = flux * maxwell_pflux(ens[:, None], energy)
 	return fang2010_spec_int(ens, dflux.T, scale_height, rho, pij=pij, axis=-1)
 
