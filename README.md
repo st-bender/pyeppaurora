@@ -63,9 +63,30 @@ $ py.test [-v] --doctest-glob='*.md'
 
 The python module itself is named `electronaurora` and is imported as usual.
 
+All functions should be `numpy`-compatible and work with scalars
+and appropriately shaped arrays.
+
 ```python
 >>> import electronaurora as aur
->>> ion_prof = aur.rr1987(en, flux, scale_heights, rhos)
+>>> ediss = aur.rr1987(1., 1., 8e5, 5e-10)
+>>> ediss
+3.3693621076457477e-10
+>>> import numpy as np
+>>> energies = np.logspace(-1, 2, 4)
+>>> fluxes = np.ones_like(energies)
+>>> # ca. 100, 150, 200 km
+>>> scale_heights = np.array([6e5, 27e5, 40e5])
+>>> rhos = np.array([5e-10, 1.7e-12, 2.6e-13])
+>>> # energy dissipation "profiles"
+>>> # broadcast to the right shape
+>>> ediss_prof = aur.fang2008(
+... 	energies[None, :], fluxes[None, :],
+... 	scale_heights[:, None], rhos[:, None]
+... )
+>>> ediss_prof
+array([[1.37708081e-49, 3.04153876e-09, 4.44256875e-07, 2.52699970e-08],
+       [1.60060833e-09, 8.63248169e-08, 3.64564419e-09, 1.62591310e-10],
+       [5.19369952e-08, 2.34089350e-08, 5.17379303e-10, 3.19504690e-11]])
 
 ```
 
