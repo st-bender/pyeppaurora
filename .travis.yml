@@ -1,5 +1,6 @@
 language: python
 cache: pip
+dist: xenial
 python:
   - "2.7"
   - "3.4"
@@ -18,7 +19,7 @@ install:
   - pip install -U pytest pytest-cov codecov coveralls
   - pip install tox-travis
   - pip install scrutinizer-ocular
-  - pip install -e ".[all]"
+  - pip install ".[all]"
 script:
   - py.test -v --doctest-glob='*.md' --cov src
 after_success:
@@ -29,3 +30,17 @@ notifications:
   email:
     on_success: never
     on_failure: always
+deploy:
+  - provider: pypi
+    edge: true
+    server: https://test.pypi.org/legacy/
+    user: __token__
+    password:
+      secure: sH6Cu43o9dfwmG3sQOu27y6lq74ddY/aZ6uc+LyzgthIXiLvJiAlSeywU9imlZTkDTNtpWHWAWu3AOxOhRDACl+S3RqW5g+7vIH3lXmvTEjgIIy98cyDHG/TD9nYafSH7s0jh4ZsipVSDHCrN+IA5LOx9oxcbpH49kru55CMsTk8yNnZkoqZSdaK0u+fpy1Z6sxhHUh16VyBde+JXJ9/bUKMtChuok6gihafgA3KCbX7ZFkrAd2eJ1MR0dD5snTXtbPLAYWe+eSdp4UqshBIZhVZS8c2D8etSpVwh2HYUCijdqeL4KCxGFfft4xJdfH1JFP9G5rIK6O2NAvetPU+lX/8vsqGoGu/0xWVVyLB+kWYp62cTsdoEVIfvBmQBo+28Z6FGUuI1OIWOpsZA+1zqVBSSFBdD6rLXSffXvW7GZB19Cf3mQLJ8xhA9wpStIweytYxKZq15EjAvuegYIV7dNWQ1jmql56fv/dgCQbRKp98tGDAWtJIsPAithqoPVfzVnms2f1dKKRGljHaiexBAseXR9ZF+aVLmtFEq9bAfxuuPszlisoG6FiVL7AKevdgHSvI8fOxOJk8vdszcw1rpyor/zZd7H2pF2eVt3GPyWIQ9TKOoVNZ4toXghtvhvMBUZeT4lIDoCihi87EDoez12wgznOodnMl21WUdpVND5g=
+    skip_existing: true
+    distributions: sdist bdist_wheel
+    on:
+      repo: st-bender/electronaurora
+      branch: master
+      tags: false
+      condition: $TRAVIS_PYTHON_VERSION == 3.7
