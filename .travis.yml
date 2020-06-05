@@ -21,7 +21,7 @@ install:
   - pip install scrutinizer-ocular
   - pip install ".[all]"
 script:
-  - py.test -v --doctest-glob='*.md' --cov src
+  - py.test -v --doctest-glob='*.md' --cov electronaurora
 after_success:
   - codecov
   - coveralls
