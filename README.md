@@ -98,9 +98,11 @@ $ pydoc electronaurora
 
 # References
 
-[1]: Roble and Ridley, Ann. Geophys., 5A(6), 369--382, 1987
-[2]: Fang et al., J. Geophys. Res., 113, A09311, 2008, doi: 10.1029/2008JA013384
-[3]: Fang et al., Geophys. Res. Lett., 37, L22106, 2010, doi: 10.1029/2010GL045406
+[1]: Roble and Ridley, Ann. Geophys., 5A(6), 369--382, 1987  
+[2]: Fang et al., J. Geophys. Res., 113, A09311, 2008,
+doi: [10.1029/2008JA013384](https://doi.org/10.1029/2008JA013384)  
+[3]: Fang et al., Geophys. Res. Lett., 37, L22106, 2010,
+doi: [10.1029/2010GL045406](https://doi.org/10.1029/2010GL045406)  
 
 # License
 
