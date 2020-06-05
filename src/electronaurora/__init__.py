@@ -14,4 +14,5 @@ auroral (100 eV--30 keV) and radiation-belt (30 keV--1 MeV) electrons.
 __version__ = "0.0.1.dev0"
 
 from .ionization import *
+from .ssusi import *
 from .recombination import *
