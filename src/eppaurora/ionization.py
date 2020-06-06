@@ -332,6 +332,12 @@ def fang2010_maxw_int(energy, flux, scale_height, rho, bounds=(0.1, 300.), nstep
 
 
 def fang2013_protons(energy, flux, scale_height, rho, pij=POLY_F2013):
+	"""Proton ionization parametrization by Fang et al., 2013 [1]_
+
+	.. [1] Fang, X., Lummerzheim, D., and Jackman, C. H. (2013),
+		Proton impact ionization and a fast calculation method,
+		J. Geophys. Res. Space Physics, 118, 5369--5378, doi:10.1002/jgra.50484.
+	"""
 	def _f_y(_cc, _y):
 		# Fang et al., 2008, Eq. (6), Fang et al., 2010 Eq. (4)
 		# Fang et al., 2013, Eqs. (6), (7)
