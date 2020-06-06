@@ -19,9 +19,9 @@ install:
   - pip install -U pytest pytest-cov codecov coveralls
   - pip install tox-travis
   - pip install scrutinizer-ocular
-  - pip install ".[all]"
+  - pip install -e ".[all]"
 script:
-  - py.test -v --doctest-glob='*.md' --cov electronaurora
+  - py.test -v --doctest-glob='*.md' --cov src
 after_success:
   - codecov
   - coveralls
