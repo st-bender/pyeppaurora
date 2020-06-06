@@ -4,7 +4,7 @@ import re
 # Always prefer setuptools over distutils
 from setuptools import find_packages, setup
 
-name = "electronaurora"
+name = "eppaurora"
 meta_path = path.join("src", name, "__init__.py")
 here = path.abspath(path.dirname(__file__))
 
@@ -50,10 +50,10 @@ if __name__ == "__main__":
 	setup(
 		name=name,
 		version=version,
-		description="Atomspheric ionization from auroral electron precipitation",
+		description="Atomspheric ionization from auroral particle precipitation",
 		long_description=long_description,
 		long_description_content_type="text/markdown",
-		url="https://github.com/st-bender/electronaurora",
+		url="https://github.com/st-bender/pyeppaurora",
 		author="Stefan Bender",
 		author_email="stefan.bender@ntnu.no",
 		license="GPLv2",

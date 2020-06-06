@@ -1,11 +1,11 @@
-# Atmospheric ionization from electron precipitation
+# Atmospheric ionization from particle precipitation
 
-[![builds](https://travis-ci.com/st-bender/electronaurora.svg?branch=master)](https://travis-ci.com/st-bender/electronaurora)
-[![codecov](https://codecov.io/gh/st-bender/electronaurora/badge.svg)](https://codecov.io/gh/st-bender/electronaurora)
-[![coveralls](https://coveralls.io/repos/github/st-bender/electronaurora/badge.svg)](https://coveralls.io/github/st-bender/electronaurora)
-[![scrutinizer](https://scrutinizer-ci.com/g/st-bender/electronaurora/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/st-bender/electronaurora/?branch=master)
+[![builds](https://travis-ci.com/st-bender/pyeppaurora.svg?branch=master)](https://travis-ci.com/st-bender/pyeppaurora)
+[![codecov](https://codecov.io/gh/st-bender/pyeppaurora/badge.svg)](https://codecov.io/gh/st-bender/pyeppaurora)
+[![coveralls](https://coveralls.io/repos/github/st-bender/pyeppaurora/badge.svg)](https://coveralls.io/github/st-bender/pyeppaurora)
+[![scrutinizer](https://scrutinizer-ci.com/g/st-bender/pyeppaurora/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/st-bender/pyeppaurora/?branch=master)
 
-Calculates atmospheric ionization profiles from electron precipitation
+Calculates atmospheric ionization profiles from particle precipitation
 using different parametrizations: Roble and Ridley, 1987 [1],
 Fang et al., 2008 [2], and Fang et al., 2010 [3].
 
@@ -19,22 +19,22 @@ may not work, and the interface might change in future versions.
 - `numpy` - required
 - `pytest` - optional, for testing
 
-### electronaurora
+### pyeppaurora
 
-As binary package support is limited, electronaurora can be installed
+As binary package support is limited, pyeppaurora can be installed
 with [`pip`](https://pip.pypa.io) directly from github
 (see <https://pip.pypa.io/en/stable/reference/pip_install/#vcs-support>
 and <https://pip.pypa.io/en/stable/reference/pip_install/#git>):
 
 ```sh
-$ pip install [-e] git+https://github.com/st-bender/electronaurora.git
+$ pip install [-e] git+https://github.com/st-bender/pyeppaurora.git
 ```
 
 The other option is to use a local clone:
 
 ```sh
-$ git clone https://github.com/st-bender/electronaurora.git
-$ cd electronaurora
+$ git clone https://github.com/st-bender/pyeppaurora.git
+$ cd pyeppaurora
 ```
 and then using `pip` (optionally using `-e`, see
 <https://pip.pypa.io/en/stable/reference/pip_install/#install-editable>):
@@ -64,13 +64,13 @@ $ py.test [-v] --doctest-glob='*.md'
 
 ## Usage
 
-The python module itself is named `electronaurora` and is imported as usual.
+The python module itself is named `eppaurora` and is imported as usual.
 
 All functions should be `numpy`-compatible and work with scalars
 and appropriately shaped arrays.
 
 ```python
->>> import electronaurora as aur
+>>> import eppaurora as aur
 >>> ediss = aur.rr1987(1., 1., 8e5, 5e-10)
 >>> ediss
 3.3693621076457477e-10
@@ -96,7 +96,7 @@ array([[1.37708081e-49, 3.04153876e-09, 4.44256875e-07, 2.52699970e-08],
 Basic class and method documentation is accessible via `pydoc`:
 
 ```sh
-$ pydoc electronaurora
+$ pydoc eppaurora
 ```
 
 # References

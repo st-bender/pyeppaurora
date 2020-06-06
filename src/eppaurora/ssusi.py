@@ -1,7 +1,7 @@
 # Copyright (c) 2020 Stefan Bender
 #
-# This file is part of electronaurora.
-# electronaurora is free software: you can redistribute it or modify
+# This file is part of pyeppaurora.
+# pyeppaurora is free software: you can redistribute it or modify
 # it under the terms of the GNU General Public License as published
 # by the Free Software Foundation, version 2.
 # See accompanying LICENSE file or http://www.gnu.org/licenses/gpl-2.0.html.

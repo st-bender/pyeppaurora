@@ -40,7 +40,7 @@ deploy:
     skip_existing: true
     distributions: sdist bdist_wheel
     on:
-      repo: st-bender/electronaurora
+      repo: st-bender/pyeppaurora
       branch: master
       tags: false
       condition: $TRAVIS_PYTHON_VERSION == 3.7

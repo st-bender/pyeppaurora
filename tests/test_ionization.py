@@ -3,7 +3,7 @@ import datetime as dt
 import numpy as np
 import pytest
 
-import electronaurora as aur
+import eppaurora as aur
 
 
 @pytest.mark.parametrize(
