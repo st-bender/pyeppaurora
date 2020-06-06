@@ -9,6 +9,9 @@ Calculates atmospheric ionization profiles from electron precipitation
 using different parametrizations: Roble and Ridley, 1987 [1],
 Fang et al., 2008 [2], and Fang et al., 2010 [3].
 
+:warning: This package is in **alpha** stage, that is, it may or
+may not work, and the interface might change in future versions.
+
 ## Install
 
 ### Requirements
