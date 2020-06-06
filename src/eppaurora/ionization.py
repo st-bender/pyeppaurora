@@ -345,7 +345,7 @@ def fang2013_protons(energy, flux, scale_height, rho, pij=POLY_F2013):
 		return (
 			_c[0] * (_y**_c[1]) * np.exp(-_c[2] * (_y**_c[3])) +
 			_c[4] * (_y**_c[5]) * np.exp(-_c[6] * (_y**_c[7])) +
-		  	_c[8] * (_y**_c[9]) * np.exp(-_c[10] * (_y**_c[11]))
+			_c[8] * (_y**_c[9]) * np.exp(-_c[10] * (_y**_c[11]))
 		)
 	# Fang et al., 2013, Eqs. (6), (7)
 	_cs = np.exp(vpolyval(pij[:, ::-1].T, np.log(energy))).T
