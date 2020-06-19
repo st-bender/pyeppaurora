@@ -40,21 +40,6 @@ POLY_F2010 = np.array([
 	[ 9.48930E-1,  1.97385E-1, -2.50660E-3, -2.06938E-3]
 ])
 
-POLY_F2013 = np.array([
-	[ 2.55050e+0,  2.69476e-1, -2.58425e-1,  4.43190e-2],
-	[ 6.39287e-1, -1.85817e-1, -3.15636e-2,  1.01370e-2],
-	[ 1.63996e+0,  2.43580e-1,  4.29873e-2,  3.77803e-2],
-	[-2.13479e-1,  1.42464e-1,  1.55840e-2,  1.97407e-3],
-	[-1.65764e-1,  3.39654e-1, -9.87971e-3,  4.02411e-3],
-	[-3.59358e-2,  2.50330e-2, -3.29365e-2,  5.08057e-3],
-	[-6.26528e-1,  1.46865e+0,  2.51853e-1, -4.57132e-2],
-	[ 1.01384e+0,  5.94301e-2, -3.27839e-2,  3.42688e-3],
-	[-1.29454e-6, -1.43623e-1,  2.82583e-1,  8.29809e-2],
-	[-1.18622e-1,  1.79191e-1,  6.49171e-2, -3.99715e-3],
-	[ 2.94890e+0, -5.75821e-1,  2.48563e-2,  8.31078e-2],
-	[-1.89515e-1,  3.53452e-2,  7.77964e-2, -4.06034e-3]
-])
-
 vpolyval = np.vectorize(np.polyval, signature='(m,n),()->(n)')
 
 
@@ -329,29 +314,3 @@ def fang2010_maxw_int(energy, flux, scale_height, rho, bounds=(0.1, 300.), nstep
 	ens = np.logspace(*bounds_l10, num=nstep)
 	dflux = flux * maxwell_pflux(ens[:, None], energy)
 	return fang2010_spec_int(ens, dflux.T, scale_height, rho, pij=pij, axis=-1)
-
-
-def fang2013_protons(energy, flux, scale_height, rho, pij=POLY_F2013):
-	"""Proton ionization parametrization by Fang et al., 2013 [1]_
-
-	.. [1] Fang, X., Lummerzheim, D., and Jackman, C. H. (2013),
-		Proton impact ionization and a fast calculation method,
-		J. Geophys. Res. Space Physics, 118, 5369--5378, doi:10.1002/jgra.50484.
-	"""
-	def _f_y(_cc, _y):
-		# Fang et al., 2008, Eq. (6), Fang et al., 2010 Eq. (4)
-		# Fang et al., 2013, Eqs. (6), (7)
-		_c = _cc.reshape((12, -1))
-		return (
-			_c[0] * (_y**_c[1]) * np.exp(-_c[2] * (_y**_c[3])) +
-			_c[4] * (_y**_c[5]) * np.exp(-_c[6] * (_y**_c[7])) +
-			_c[8] * (_y**_c[9]) * np.exp(-_c[10] * (_y**_c[11]))
-		)
-	# Fang et al., 2013, Eqs. (6), (7)
-	_cs = np.exp(vpolyval(pij[:, ::-1].T, np.log(energy))).T
-	# Fang et al., 2013, Eq. (5)
-	y = 7.5 / energy * (1e4 * rho * scale_height)**(0.9)
-	f_y = _f_y(_cs, y)
-	# Fang et al., 2013, Eq. (3)
-	en_diss = f_y * flux / scale_height
-	return en_diss
