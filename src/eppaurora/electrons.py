@@ -9,11 +9,11 @@
 """Atmospheric ionization rate parametrizations
 
 Includes the atmospheric ionization rate parametrizations for auroral
-and medium-energy electron precipitation, 100 eV--1 MeV.
+and medium-energy electron precipitation, 100 eV--1 MeV [1]_, [2]_, and [3]_.
 
-.. [#] Roble and Ridley, Ann. Geophys., 5A(6), 369--382, 1987
-.. [#] Fang et al., J. Geophys. Res., 113, A09311, 2008
-.. [#] Fang et al., Geophys. Res. Lett., 37, L22106, 2010
+.. [1] Roble and Ridley, Ann. Geophys., 5A(6), 369--382, 1987
+.. [2] Fang et al., J. Geophys. Res., 113, A09311, 2008
+.. [3] Fang et al., Geophys. Res. Lett., 37, L22106, 2010
 """
 
 import numpy as np
