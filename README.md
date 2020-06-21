@@ -97,17 +97,35 @@ Basic class and method documentation is accessible via `pydoc`:
 
 ```sh
 $ pydoc eppaurora
+$ pydoc eppaurora.electrons
+$ pydoc eppaurora.protons
+$ pydoc eppaurora.recombination
 ```
 
-# References
+## References
+
+### Electron ionization
 
 [1]: Roble and Ridley, Ann. Geophys., 5A(6), 369--382, 1987  
-[2]: Fang et al., J. Geophys. Res., 113, A09311, 2008,
+[2]: Fang et al., J. Geophys. Res. Space Phys., 113, A09311, 2008,
 doi: [10.1029/2008JA013384](https://doi.org/10.1029/2008JA013384)  
 [3]: Fang et al., Geophys. Res. Lett., 37, L22106, 2010,
 doi: [10.1029/2010GL045406](https://doi.org/10.1029/2010GL045406)  
 
-# License
+### Proton ionization
+
+[4]: Fang et al., J. Geophys. Res. Space Phys., 118, 5369--5378, 2013,
+doi: [10.1002/jgra.50484](https://doi.org/10.1002/jgra.50484)
+
+### Recombination rates
+
+[5]: Vickrey et al., J. Geophys. Res. Space Phys., 87, A7, 5184--5196,
+doi: [10.1029/ja087ia07p05184](https//doi.org/10.1029/ja087ia07p05184)  
+[6]: Gledhill, Radio Sci., 21, 3, 399-408,
+doi: [10.1029/rs021i003p00399](https://doi.org/10.1029/rs021i003p00399)  
+[7]: https://ssusi.jhuapl.edu/data_algorithms
+
+## License
 
 This python interface is free software: you can redistribute it or modify
 it under the terms of the GNU General Public License as published by
