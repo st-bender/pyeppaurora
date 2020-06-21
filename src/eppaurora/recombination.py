@@ -7,28 +7,89 @@
 # by the Free Software Foundation, version 2.
 # See accompanying LICENSE file or http://www.gnu.org/licenses/gpl-2.0.html.
 """Atmospheric recombination rate parametrizations
+
+Atmospheric recombination rate parametrizations as described
+in [1]_, [2]_, and [3]_.
+
+.. [1] Vickrey et al., J. Geophys. Res. Space Phys., 87, A7, 5184--5196,
+	doi:10.1029/ja087ia07p05184
+.. [2] Gledhill, Radio Sci., 21, 3, 399-408, doi:10.1029/rs021i003p00399
+.. [3] https://ssusi.jhuapl.edu/data_algorithms
 """
 
 import numpy as np
 
 
 def alpha_vickrey1982(h):
-	""" Vickrey et al. 1982 """
+	""" Vickrey et al. 1982 [1]_
+
+	Parameters
+	----------
+	h: float or array_like
+		Altitude in [km]
+
+	Returns
+	-------
+	alpha: float or array_like
+		The recombination rate in [cm³ s­¹]
+
+	.. [1] Vickrey et al., J. Geophys. Res. Space Phys.,
+		87, A7, 5184--5196, doi:10.1029/ja087ia07p05184
+	"""
 	return 2.5e-6 * np.exp(-h / 51.2)
 
 
 def alpha_gledhill1986_aurora(h):
-	""" Gledhill 1986, Aurora parameterization"""
+	""" Gledhill 1986, Aurora parameterization [1]_
+
+	Parameters
+	----------
+	h: float or array_like
+		Altitude in [km]
+
+	Returns
+	-------
+	alpha: float or array_like
+		The recombination rate in [cm³ s­¹]
+
+	.. [1] Radio Sci., 21, 3, 399-408, doi:10.1029/rs021i003p00399
+	"""
 	return 4.3e-6 * np.exp(-2.42e-2 * h) + 8.16e12 * np.exp(-0.524 * h)
 
 
 def alpha_gledhill1986_day(h):
-	""" Gledhill 1986, day-time parameterization"""
+	""" Gledhill 1986, day-time parameterization [1]_
+
+	Parameters
+	----------
+	h: float or array_like
+		Altitude in [km]
+
+	Returns
+	-------
+	alpha: float or array_like
+		The recombination rate in [cm³ s­¹]
+
+	.. [1] Radio Sci., 21, 3, 399-408, doi:10.1029/rs021i003p00399
+	"""
 	return 0.501 * np.exp(-0.165 * h)
 
 
 def alpha_gledhill1986_night(h):
-	""" Gledhill 1986, night-time parameterization"""
+	""" Gledhill 1986, night-time parameterization [1]_
+
+	Parameters
+	----------
+	h: float or array_like
+		Altitude in [km]
+
+	Returns
+	-------
+	alpha: float or array_like
+		The recombination rate in [cm³ s­¹]
+
+	.. [1] Radio Sci., 21, 3, 399-408, doi:10.1029/rs021i003p00399
+	"""
 	return 652 * np.exp(-0.234 * h)
 
 
@@ -52,6 +113,11 @@ def alpha_ssusi(z, alpha0=4.2e-7, scaleh=28.9, z0=108., z1=None):
 	z1: float, optional
 		Use :func:`alpha_vickrey1982()` above z1 [km].
 		Default: None
+
+	Returns
+	-------
+	alpha: float or array_like
+		The recombination rate in [cm³ s­¹]
 
 	References
 	----------
