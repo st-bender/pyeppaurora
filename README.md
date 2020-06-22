@@ -5,9 +5,11 @@
 [![coveralls](https://coveralls.io/repos/github/st-bender/pyeppaurora/badge.svg)](https://coveralls.io/github/st-bender/pyeppaurora)
 [![scrutinizer](https://scrutinizer-ci.com/g/st-bender/pyeppaurora/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/st-bender/pyeppaurora/?branch=master)
 
-Calculates atmospheric ionization profiles from particle precipitation
-using different parametrizations: Roble and Ridley, 1987 [1],
-Fang et al., 2008 [2], and Fang et al., 2010 [3].
+Includes various parametrizations for atmospheric energy dissipation
+(ionization) from particle precipitation into the atmosphere.
+Includes also some recombination rate parametrizations to convert
+the ionization rates to electron densities in the upper atmosphere.
+See [References](#references) for a list of included parametrizations.
 
 :warning: This package is in **alpha** stage, that is, it may or
 may not work, and the interface might change in future versions.
@@ -19,9 +21,9 @@ may not work, and the interface might change in future versions.
 - `numpy` - required
 - `pytest` - optional, for testing
 
-### pyeppaurora
+### eppaurora
 
-As binary package support is limited, pyeppaurora can be installed
+The latest development version of pyeppaurora can be installed
 with [`pip`](https://pip.pypa.io) directly from github
 (see <https://pip.pypa.io/en/stable/reference/pip_install/#vcs-support>
 and <https://pip.pypa.io/en/stable/reference/pip_install/#git>):
