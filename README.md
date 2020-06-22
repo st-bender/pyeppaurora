@@ -5,8 +5,9 @@
 [![coveralls](https://coveralls.io/repos/github/st-bender/pyeppaurora/badge.svg)](https://coveralls.io/github/st-bender/pyeppaurora)
 [![scrutinizer](https://scrutinizer-ci.com/g/st-bender/pyeppaurora/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/st-bender/pyeppaurora/?branch=master)
 
-Includes various parametrizations for atmospheric energy dissipation
-(ionization) from particle precipitation into the atmosphere.
+Bundles some of the parametrizations for middle and upper atmospheric
+ionization and recombination rates for precipitating
+auroral and radiation-belt electrons as well as protons.
 Includes also some recombination rate parametrizations to convert
 the ionization rates to electron densities in the upper atmosphere.
 See [References](#references) for a list of included parametrizations.
