@@ -16,6 +16,8 @@ From the SSUSI ATBD documents.
 
 import numpy as np
 
+__all__ = ["ssusi_ioniz"]
+
 # pre-determined analytical model coefficients of peak auroral ionization production rate height
 # electrons
 CHMAX_E = [2.07923, -9.41205e-2]

@@ -18,6 +18,17 @@ and medium-energy electron precipitation, 100 eV--1 MeV [1]_, [2]_, and [3]_.
 
 import numpy as np
 
+__all__ = [
+	"rr1987",
+	"rr1987_mod",
+	"fang2008",
+	"fang2010_mono",
+	"fang2010_spec_int",
+	"fang2010_maxw_int",
+	"maxwell_general",
+	"maxwell_pflux",
+]
+
 POLY_F2008 = np.array([
 	[ 3.49979e-1, -6.18200e-2, -4.08124e-2,  1.65414e-2],
 	[ 5.85425e-1, -5.00793e-2,  5.69309e-2, -4.02491e-3],

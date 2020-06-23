@@ -19,6 +19,14 @@ in [1]_, [2]_, and [3]_.
 
 import numpy as np
 
+__all__ = [
+	"alpha_vickrey1982",
+	"alpha_gledhill1986_aurora",
+	"alpha_gledhill1986_day",
+	"alpha_gledhill1986_night",
+	"alpha_ssusi",
+]
+
 
 def alpha_vickrey1982(h):
 	u""" Vickrey et al. 1982 [1]_

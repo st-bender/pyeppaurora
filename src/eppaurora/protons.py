@@ -18,6 +18,8 @@ proton precipitation [1]_.
 
 import numpy as np
 
+__all__ = ["fang2013_protons"]
+
 POLY_F2013 = np.array([
 	[ 2.55050e+0,  2.69476e-1, -2.58425e-1,  4.43190e-2],
 	[ 6.39287e-1, -1.85817e-1, -3.15636e-2,  1.01370e-2],
