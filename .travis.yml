@@ -44,3 +44,15 @@ deploy:
       branch: master
       tags: false
       condition: $TRAVIS_PYTHON_VERSION == 3.7
+  - provider: pypi
+    edge: true
+    user: __token__
+    password:
+      secure: RUYoCg3SFn/0tP5VVeYYfi3HWiHl+juOcHQX/4PAq/qH79iicHV8KuYMNjyIkH1BkDw2NYYIvG5XFJHisXe6Shro7o+vxwB8BlJFPVTjk72dUs8QvgFHXx/YQUXjHtgnlMOhdVwek4wd9sSonrwoz7CYMEhGr98R3szQUXEJgGcgi/HlmD4el5OonDsHa2usFAJRc7P9E9aQ412kMgFx6zb6/cWktxNTF0H+PHI/U4rwWeTAEJfM31f6iV+bGb1RDL780AAH+7gV6PtezGOYkdNdLRL1WPE8CHQ3/qGlrJkEaJvjfVy9gkMUFMhSIzxgH9WMxF6laTkiose5ZH90z9Dx9qqxO/05jfzTJL6tceYaAk/1uODIR9Slg4svPhrT2+XCo6cFl41OL9aD9Fwyp0PTqrA0nqyusPY3Aa3x+nmqsIXKulfGu6VeWEYmw95sh6RtbnDsC+Sip6YQnYf0na2DBCLG1OzlbbxybW/CWL/sRdqwhyFc/c2qG5FUX9DsVMl4lEJ8L134Ed9u/P+S8n16xr2snJSzIV/zH4wFTrW6Kpyx8c5CDRdwQmQRfM1YxSFxuOADeBuXrPpaQAyoZb55iCZ6J5av2QFQgKaRolKY4m0iD2jOGW1Pk9ALtnV/mQt9R/C3TE0WkK8qdyJFJO7uyf4DgqEnI8Ir/3hTWHc=
+    skip_existing: true
+    distributions: sdist bdist_wheel
+    on:
+      repo: st-bender/pyeppaurora
+      branch: master
+      tags: true
+      condition: $TRAVIS_PYTHON_VERSION == 3.7
