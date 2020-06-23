@@ -1,6 +1,9 @@
 # Atmospheric ionization from particle precipitation
 
 [![builds](https://travis-ci.com/st-bender/pyeppaurora.svg?branch=master)](https://travis-ci.com/st-bender/pyeppaurora)
+[![package](https://img.shields.io/pypi/v/eppaurora.svg?style=flat)](https://pypi.org/project/eppaurora)
+[![wheel](https://img.shields.io/pypi/wheel/eppaurora.svg?style=flat)](https://pypi.org/project/eppaurora)
+[![pyversions](https://img.shields.io/pypi/pyversions/eppaurora.svg?style=flat)](https://pypi.org/project/eppaurora)
 [![codecov](https://codecov.io/gh/st-bender/pyeppaurora/badge.svg)](https://codecov.io/gh/st-bender/pyeppaurora)
 [![coveralls](https://coveralls.io/repos/github/st-bender/pyeppaurora/badge.svg)](https://coveralls.io/github/st-bender/pyeppaurora)
 [![scrutinizer](https://scrutinizer-ci.com/g/st-bender/pyeppaurora/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/st-bender/pyeppaurora/?branch=master)
@@ -24,7 +27,12 @@ may not work, and the interface might change in future versions.
 
 ### eppaurora
 
-The latest development version of pyeppaurora can be installed
+An **experimental** `pip` package called `eppaurora` is available from the
+main package repository, it can be installed with:
+```sh
+$ pip install eppaurora
+```
+The latest development version can be installed
 with [`pip`](https://pip.pypa.io) directly from github
 (see <https://pip.pypa.io/en/stable/reference/pip_install/#vcs-support>
 and <https://pip.pypa.io/en/stable/reference/pip_install/#git>):
