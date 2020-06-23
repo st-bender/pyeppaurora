@@ -21,7 +21,7 @@ import numpy as np
 
 
 def alpha_vickrey1982(h):
-	""" Vickrey et al. 1982 [1]_
+	u""" Vickrey et al. 1982 [1]_
 
 	Parameters
 	----------
@@ -31,7 +31,7 @@ def alpha_vickrey1982(h):
 	Returns
 	-------
 	alpha: float or array_like
-		The recombination rate in [cm³ s­¹]
+		The recombination rate [cm³ s⁻¹].
 
 	.. [1] Vickrey et al., J. Geophys. Res. Space Phys.,
 		87, A7, 5184--5196, doi:10.1029/ja087ia07p05184
@@ -50,7 +50,7 @@ def alpha_gledhill1986_aurora(h):
 	Returns
 	-------
 	alpha: float or array_like
-		The recombination rate in [cm³ s­¹]
+		The recombination rate [cm³ s⁻¹].
 
 	.. [1] Radio Sci., 21, 3, 399-408, doi:10.1029/rs021i003p00399
 	"""
@@ -58,7 +58,7 @@ def alpha_gledhill1986_aurora(h):
 
 
 def alpha_gledhill1986_day(h):
-	""" Gledhill 1986, day-time parameterization [1]_
+	u""" Gledhill 1986, day-time parameterization [1]_
 
 	Parameters
 	----------
@@ -68,7 +68,7 @@ def alpha_gledhill1986_day(h):
 	Returns
 	-------
 	alpha: float or array_like
-		The recombination rate in [cm³ s­¹]
+		The recombination rate [cm³ s⁻¹].
 
 	.. [1] Radio Sci., 21, 3, 399-408, doi:10.1029/rs021i003p00399
 	"""
@@ -86,7 +86,7 @@ def alpha_gledhill1986_night(h):
 	Returns
 	-------
 	alpha: float or array_like
-		The recombination rate in [cm³ s­¹]
+		The recombination rate [cm³ s⁻¹].
 
 	.. [1] Radio Sci., 21, 3, 399-408, doi:10.1029/rs021i003p00399
 	"""
@@ -94,7 +94,7 @@ def alpha_gledhill1986_night(h):
 
 
 def alpha_ssusi(z, alpha0=4.2e-7, scaleh=28.9, z0=108., z1=None):
-	"""
+	u"""
 	Implements section 2.6.2.15 in [2]_.
 
 	Parameters
@@ -117,7 +117,7 @@ def alpha_ssusi(z, alpha0=4.2e-7, scaleh=28.9, z0=108., z1=None):
 	Returns
 	-------
 	alpha: float or array_like
-		The recombination rate in [cm³ s­¹]
+		The recombination rate [cm³ s⁻¹].
 
 	References
 	----------
