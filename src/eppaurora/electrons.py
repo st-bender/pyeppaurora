@@ -255,6 +255,45 @@ def fang2010_spec_int(ens, dfluxes, scale_height, rho, pij=POLY_F2010, axis=-1):
 	return np.trapz(ediss_f10 * ens, ens, axis=axis)
 
 
+def fang2010_maxw_int(energy, flux, scale_height, rho, bounds=(0.1, 300.), nstep=128, pij=POLY_F2010):
+	"""Integrate Fang et al., 2010 over a Maxwellian spectrum
+
+	Integrates the mono-energetic parametrization from Fang et al., 2010 [#]_
+	over a Maxwellian spectrum with characteristic energy `energy` and
+	total energy flux `flux`.
+
+	Parameters
+	----------
+	energy: array_like (M,...)
+		Characteristic energy E_0 [keV] of the Maxwellian distribution.
+	flux: array_like (M,...)
+		Integrated energy flux Q_0 [keV / cm² / s¹]
+	scale_height: array_like (N,...)
+		The atmospheric scale heights [cm].
+	rho: array_like (N,...)
+		The atmospheric mass density [g / cm³]
+	bounds: tuple, optional
+		(min, max) [keV] of the integration range to integrate the Maxwellian.
+		Make sure that this is appropriate to encompass the spectrum.
+		Default: (0.1, 300.)
+	nsteps: int, optional
+		Number of integration steps, default: 128.
+
+	Returns
+	-------
+	en_diss: array_like (M,N)
+		The dissipated energy profiles [keV].
+
+	See Also
+	--------
+	fang2010_mono, fang2010_spec_int
+	"""
+	bounds_l10 = np.log10(bounds)
+	ens = np.logspace(*bounds_l10, num=nstep)
+	dflux = flux * maxwell_pflux(ens[:, None], energy)
+	return fang2010_spec_int(ens, dflux.T, scale_height, rho, pij=pij, axis=-1)
+
+
 def maxwell_general(en, en_0=10.):
 	"""Maxwell number flux spectrum as in Fang2008 [1]
 
@@ -299,42 +338,3 @@ def maxwell_pflux(en, en_0=10.):
 		([kev-2] scaled by unit energy flux).
 	"""
 	return 0.5 / en_0**3 * maxwell_general(en, en_0)
-
-
-def fang2010_maxw_int(energy, flux, scale_height, rho, bounds=(0.1, 300.), nstep=128, pij=POLY_F2010):
-	"""Integrate Fang et al., 2010 over a Maxwellian spectrum
-
-	Integrates the mono-energetic parametrization from Fang et al., 2010 [#]_
-	over a Maxwellian spectrum with characteristic energy `energy` and
-	total energy flux `flux`.
-
-	Parameters
-	----------
-	energy: array_like (M,...)
-		Characteristic energy E_0 [keV] of the Maxwellian distribution.
-	flux: array_like (M,...)
-		Integrated energy flux Q_0 [keV / cm² / s¹]
-	scale_height: array_like (N,...)
-		The atmospheric scale heights [cm].
-	rho: array_like (N,...)
-		The atmospheric mass density [g / cm³]
-	bounds: tuple, optional
-		(min, max) [keV] of the integration range to integrate the Maxwellian.
-		Make sure that this is appropriate to encompass the spectrum.
-		Default: (0.1, 300.)
-	nsteps: int, optional
-		Number of integration steps, default: 128.
-
-	Returns
-	-------
-	en_diss: array_like (M,N)
-		The dissipated energy profiles [keV].
-
-	See Also
-	--------
-	fang2010_mono, fang2010_spec_int
-	"""
-	bounds_l10 = np.log10(bounds)
-	ens = np.logspace(*bounds_l10, num=nstep)
-	dflux = flux * maxwell_pflux(ens[:, None], energy)
-	return fang2010_spec_int(ens, dflux.T, scale_height, rho, pij=pij, axis=-1)
