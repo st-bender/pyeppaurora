@@ -194,13 +194,13 @@ def fang2010_mono(energy, flux, scale_height, rho, pij=POLY_F2010):
 	Parameters
 	----------
 	energy: array_like (M,...)
-		Characteristic energy E_0 [keV] of the Maxwellian distribution.
+		Energy E_0 of the mono-energetic electron beam [keV].
 	flux: array_like (M,...)
-		Integrated energy flux Q_0 [keV / cm² / s¹]
+		Energy flux Q_0 of the mono-energetic electron beam [keV / cm² / s¹].
 	scale_height: array_like (N,...)
-		The atmospheric scale heights.
+		The atmospheric scale heights [cm].
 	rho: array_like (N,...)
-		The atmospheric densities, corresponding to the scale heights.
+		The atmospheric mass densities [g / cm³], corresponding to the scale heights.
 
 	Returns
 	-------
