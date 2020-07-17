@@ -23,6 +23,7 @@ may not work, and the interface might change in future versions.
 ### Requirements
 
 - `numpy` - required
+- `scipy` - required for 2-D interpolation
 - `pytest` - optional, for testing
 
 ### eppaurora
@@ -108,6 +109,7 @@ Basic class and method documentation is accessible via `pydoc`:
 
 ```sh
 $ pydoc eppaurora
+$ pydoc eppaurora.brems
 $ pydoc eppaurora.electrons
 $ pydoc eppaurora.protons
 $ pydoc eppaurora.recombination
@@ -123,18 +125,24 @@ doi: [10.1029/2008JA013384](https://doi.org/10.1029/2008JA013384)
 [3]: Fang et al., Geophys. Res. Lett., 37, L22106, 2010,
 doi: [10.1029/2010GL045406](https://doi.org/10.1029/2010GL045406)  
 
+### Ionization by secondary electrons from bremsstrahlung
+
+[4]: Berger et al., Journal of Atmospheric and Terrestrial Physics,
+Volume 36, Issue 4, 591--617, April 1974,
+doi: [10.1016/0021-9169(74)90085-3](https://doi.org/10.1016/0021-9169%2874%2990085-3)
+
 ### Proton ionization
 
-[4]: Fang et al., J. Geophys. Res. Space Phys., 118, 5369--5378, 2013,
+[5]: Fang et al., J. Geophys. Res. Space Phys., 118, 5369--5378, 2013,
 doi: [10.1002/jgra.50484](https://doi.org/10.1002/jgra.50484)
 
 ### Recombination rates
 
-[5]: Vickrey et al., J. Geophys. Res. Space Phys., 87, A7, 5184--5196,
-doi: [10.1029/ja087ia07p05184](https//doi.org/10.1029/ja087ia07p05184)  
-[6]: Gledhill, Radio Sci., 21, 3, 399-408,
+[6]: Vickrey et al., J. Geophys. Res. Space Phys., 87, A7, 5184--5196,
+doi: [10.1029/ja087ia07p05184](https://doi.org/10.1029/ja087ia07p05184)  
+[7]: Gledhill, Radio Sci., 21, 3, 399-408,
 doi: [10.1029/rs021i003p00399](https://doi.org/10.1029/rs021i003p00399)  
-[7]: https://ssusi.jhuapl.edu/data_algorithms
+[8]: https://ssusi.jhuapl.edu/data_algorithms
 
 ## License
 
