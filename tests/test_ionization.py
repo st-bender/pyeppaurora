@@ -15,6 +15,7 @@ import eppaurora as aur
 		aur.fang2010_mono,
 		aur.fang2010_maxw_int,
 		aur.fang2013_protons,
+		aur.berger1974,
 	]
 )
 def test_endiss(edissfunc):
