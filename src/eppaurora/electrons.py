@@ -29,7 +29,7 @@ __all__ = [
 	"maxwell_pflux",
 ]
 
-POLY_F2008 = np.array([
+POLY_F2008 = [
 	[ 3.49979e-1, -6.18200e-2, -4.08124e-2,  1.65414e-2],
 	[ 5.85425e-1, -5.00793e-2,  5.69309e-2, -4.02491e-3],
 	[ 1.69692e-1, -2.58981e-2,  1.96822e-2,  1.20505e-3],
@@ -38,9 +38,9 @@ POLY_F2008 = np.array([
 	[ 8.83195e-1,  4.31402e-2, -8.33599e-2,  1.02515e-2],
 	[ 1.90953,    -4.74704e-2, -1.80200e-1,  2.46652e-2],
 	[-1.29566,    -2.10952e-1,  2.73106e-1, -2.92752e-2]
-])
+]
 
-POLY_F2010 = np.array([
+POLY_F2010 = [
 	[ 1.24616E+0,  1.45903E+0, -2.42269E-1,  5.95459E-2],
 	[ 2.23976E+0, -4.22918E-7,  1.36458E-2,  2.53332E-3],
 	[ 1.41754E+0,  1.44597E-1,  1.70433E-2,  6.39717E-4],
@@ -49,7 +49,7 @@ POLY_F2010 = np.array([
 	[ 3.86019E-1,  1.75430E-3, -7.42960E-4,  4.60881E-4],
 	[-6.45454E-1,  8.49555E-4, -4.28581E-2, -2.99302E-3],
 	[ 9.48930E-1,  1.97385E-1, -2.50660E-3, -2.06938E-3]
-])
+]
 
 vpolyval = np.vectorize(np.polyval, signature='(m,n),()->(n)')
 
@@ -176,6 +176,8 @@ def fang2008(energy, flux, scale_height, rho, pij=POLY_F2008):
 		_c = _cc.reshape((8, -1))
 		return (_c[0] * (_y**_c[1]) * np.exp(-_c[2] * (_y**_c[3])) +
 			_c[4] * (_y**_c[5]) * np.exp(-_c[6] * (_y**_c[7])))
+
+	pij = np.asarray(pij)
 	# Fang et al., 2008, Eq. (7)
 	_cs = np.exp(vpolyval(pij[:, ::-1].T, np.log(energy))).T
 	# Fang et al., 2008, Eq. (4)
@@ -217,6 +219,8 @@ def fang2010_mono(energy, flux, scale_height, rho, pij=POLY_F2010):
 		_c = _cc.reshape((8, -1))
 		return (_c[0] * (_y**_c[1]) * np.exp(-_c[2] * (_y**_c[3])) +
 			_c[4] * (_y**_c[5]) * np.exp(-_c[6] * (_y**_c[7])))
+
+	pij = np.asarray(pij)
 	# Fang et al., 2010, Eq. (5)
 	_cs = np.exp(vpolyval(pij[:, ::-1].T, np.log(energy))).T
 	# Fang et al., 2010, Eq. (1)

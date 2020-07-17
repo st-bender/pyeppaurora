@@ -20,7 +20,7 @@ import numpy as np
 
 __all__ = ["fang2013_protons"]
 
-POLY_F2013 = np.array([
+POLY_F2013 = [
 	[ 2.55050e+0,  2.69476e-1, -2.58425e-1,  4.43190e-2],
 	[ 6.39287e-1, -1.85817e-1, -3.15636e-2,  1.01370e-2],
 	[ 1.63996e+0,  2.43580e-1,  4.29873e-2,  3.77803e-2],
@@ -33,7 +33,7 @@ POLY_F2013 = np.array([
 	[-1.18622e-1,  1.79191e-1,  6.49171e-2, -3.99715e-3],
 	[ 2.94890e+0, -5.75821e-1,  2.48563e-2,  8.31078e-2],
 	[-1.89515e-1,  3.53452e-2,  7.77964e-2, -4.06034e-3]
-])
+]
 
 vpolyval = np.vectorize(np.polyval, signature='(m,n),()->(n)')
 
@@ -54,6 +54,8 @@ def fang2013_protons(energy, flux, scale_height, rho, pij=POLY_F2013):
 			_c[4] * (_y**_c[5]) * np.exp(-_c[6] * (_y**_c[7])) +
 			_c[8] * (_y**_c[9]) * np.exp(-_c[10] * (_y**_c[11]))
 		)
+
+	pij = np.asarray(pij)
 	# Fang et al., 2013, Eqs. (6), (7)
 	_cs = np.exp(vpolyval(pij[:, ::-1].T, np.log(energy))).T
 	# Fang et al., 2013, Eq. (5)
