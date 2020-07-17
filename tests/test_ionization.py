@@ -14,6 +14,7 @@ import eppaurora as aur
 		aur.fang2008,
 		aur.fang2010_mono,
 		aur.fang2010_maxw_int,
+		aur.fang2013_protons,
 	]
 )
 def test_endiss(edissfunc):
@@ -26,6 +27,19 @@ def test_endiss(edissfunc):
 	ediss = edissfunc(
 		energies[None, :], fluxes[None, :],
 		scale_heights[:, None], rhos[:, None]
+	)
+	assert ediss.shape == (3, 4)
+	return
+
+
+def test_ssusi_ioniz():
+	energies = np.logspace(-1, 2, 4)
+	fluxes = np.ones_like(energies)
+	z = np.array([100, 120, 150])
+	# energy dissipation "profiles"
+	ediss = aur.ssusi_ioniz(
+		z[:, None],
+		energies[None, :], fluxes[None, :],
 	)
 	assert ediss.shape == (3, 4)
 	return
