@@ -17,6 +17,7 @@ proton precipitation [1]_.
 """
 
 import numpy as np
+from numpy.polynomial.polynomial import polyval
 
 __all__ = ["fang2013_protons"]
 
@@ -35,8 +36,6 @@ POLY_F2013 = [
 	[-1.89515e-1,  3.53452e-2,  7.77964e-2, -4.06034e-3]
 ]
 
-vpolyval = np.vectorize(np.polyval, signature='(m,n),()->(n)')
-
 
 def fang2013_protons(energy, flux, scale_height, rho, pij=POLY_F2013):
 	"""Proton ionization parametrization by Fang et al., 2013 [1]_
@@ -45,10 +44,9 @@ def fang2013_protons(energy, flux, scale_height, rho, pij=POLY_F2013):
 		Proton impact ionization and a fast calculation method,
 		J. Geophys. Res. Space Physics, 118, 5369--5378, doi:10.1002/jgra.50484.
 	"""
-	def _f_y(_cc, _y):
+	def _f_y(_c, _y):
 		# Fang et al., 2008, Eq. (6), Fang et al., 2010 Eq. (4)
 		# Fang et al., 2013, Eqs. (6), (7)
-		_c = _cc.reshape((12, -1))
 		return (
 			_c[0] * (_y**_c[1]) * np.exp(-_c[2] * (_y**_c[3])) +
 			_c[4] * (_y**_c[5]) * np.exp(-_c[6] * (_y**_c[7])) +
@@ -57,7 +55,7 @@ def fang2013_protons(energy, flux, scale_height, rho, pij=POLY_F2013):
 
 	pij = np.asarray(pij)
 	# Fang et al., 2013, Eqs. (6), (7)
-	_cs = np.exp(vpolyval(pij[:, ::-1].T, np.log(energy))).T
+	_cs = np.exp(polyval(np.log(energy), pij.T))
 	# Fang et al., 2013, Eq. (5)
 	y = 7.5 / energy * (1e4 * rho * scale_height)**(0.9)
 	f_y = _f_y(_cs, y)
