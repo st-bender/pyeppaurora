@@ -17,6 +17,7 @@ and medium-energy electron precipitation, 100 eV--1 MeV [1]_, [2]_, and [3]_.
 """
 
 import numpy as np
+from numpy.polynomial.polynomial import polyval
 
 __all__ = [
 	"rr1987",
@@ -50,8 +51,6 @@ POLY_F2010 = [
 	[-6.45454E-1,  8.49555E-4, -4.28581E-2, -2.99302E-3],
 	[ 9.48930E-1,  1.97385E-1, -2.50660E-3, -2.06938E-3]
 ]
-
-vpolyval = np.vectorize(np.polyval, signature='(m,n),()->(n)')
 
 
 def rr1987(energy, flux, scale_height, rho):
@@ -145,6 +144,18 @@ def rr1987_mod(energy, flux, scale_height, rho):
 	return en_diss
 
 
+def _fang_f_y(_c, _y):
+	"""Polynomial evaluation helper
+
+	Fang et al., 2008, Eq. (6), Fang et al., 2010 Eq. (4)
+	"""
+	ret = (
+		_c[0] * (_y**_c[1]) * np.exp(-_c[2] * (_y**_c[3])) +
+		_c[4] * (_y**_c[5]) * np.exp(-_c[6] * (_y**_c[7]))
+	)
+	return ret
+
+
 def fang2008(energy, flux, scale_height, rho, pij=POLY_F2008):
 	"""Atmospheric electron energy dissipation from Fang et al., 2008
 
@@ -171,18 +182,12 @@ def fang2008(energy, flux, scale_height, rho, pij=POLY_F2008):
 
 	.. [#] Fang et al., J. Geophys. Res., 113, A09311, 2008, doi: 10.1029/2008JA013384
 	"""
-	def _f_y(_cc, _y):
-		# Fang et al., 2008, Eq. (6)
-		_c = _cc.reshape((8, -1))
-		return (_c[0] * (_y**_c[1]) * np.exp(-_c[2] * (_y**_c[3])) +
-			_c[4] * (_y**_c[5]) * np.exp(-_c[6] * (_y**_c[7])))
-
 	pij = np.asarray(pij)
 	# Fang et al., 2008, Eq. (7)
-	_cs = np.exp(vpolyval(pij[:, ::-1].T, np.log(energy))).T
+	_cs = np.exp(polyval(np.log(energy), pij.T))
 	# Fang et al., 2008, Eq. (4)
 	y = (rho * scale_height / (4e-6))**(1 / 1.65) / energy
-	f_y = _f_y(_cs, y)
+	f_y = _fang_f_y(_cs, y)
 	# Fang et al., 2008, Eq. (2)
 	en_diss = 0.5 * f_y * flux / scale_height
 	return en_diss
@@ -214,18 +219,12 @@ def fang2010_mono(energy, flux, scale_height, rho, pij=POLY_F2010):
 
 	.. [#] Fang et al., Geophys. Res. Lett., 37, L22106, 2010, doi: 10.1029/2010GL045406
 	"""
-	def _f_y(_cc, _y):
-		# Fang et al., 2008, Eq. (6), Fang et al., 2010 Eq. (4)
-		_c = _cc.reshape((8, -1))
-		return (_c[0] * (_y**_c[1]) * np.exp(-_c[2] * (_y**_c[3])) +
-			_c[4] * (_y**_c[5]) * np.exp(-_c[6] * (_y**_c[7])))
-
 	pij = np.asarray(pij)
 	# Fang et al., 2010, Eq. (5)
-	_cs = np.exp(vpolyval(pij[:, ::-1].T, np.log(energy))).T
+	_cs = np.exp(polyval(np.log(energy), pij.T))
 	# Fang et al., 2010, Eq. (1)
 	y = 2. / energy * (rho * scale_height / (6e-6))**(0.7)
-	f_y = _f_y(_cs, y)
+	f_y = _fang_f_y(_cs, y)
 	# Fang et al., 2008, Eq. (2)
 	en_diss = f_y * flux / scale_height
 	return en_diss
