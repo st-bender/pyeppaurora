@@ -5,20 +5,22 @@ import pytest
 
 import eppaurora as aur
 
+EDISS_FUNCS_EXPECTED = [
+	(aur.rr1987, 4.51517584e-07),
+	(aur.rr1987_mod, 4.75296602e-07),
+	(aur.fang2008, 4.44256875e-07),
+	(aur.fang2010_mono, 1.96516057e-007),
+	(aur.fang2010_maxw_int, 4.41340659e-07),
+	(aur.fang2013_protons, 4.09444686e-22),
+	(aur.berger1974, np.nan),
+]
+
 
 @pytest.mark.parametrize(
-	"edissfunc",
-	[
-		aur.rr1987,
-		aur.rr1987_mod,
-		aur.fang2008,
-		aur.fang2010_mono,
-		aur.fang2010_maxw_int,
-		aur.fang2013_protons,
-		aur.berger1974,
-	]
+	"edissfunc, expected",
+	EDISS_FUNCS_EXPECTED,
 )
-def test_endiss(edissfunc):
+def test_endiss(edissfunc, expected):
 	energies = np.logspace(-1, 2, 4)
 	fluxes = np.ones_like(energies)
 	# ca. 100, 150, 200 km
@@ -30,6 +32,7 @@ def test_endiss(edissfunc):
 		scale_heights[:, None], rhos[:, None]
 	)
 	assert ediss.shape == (3, 4)
+	np.testing.assert_allclose(ediss[0, 2], expected)
 	return
 
 
