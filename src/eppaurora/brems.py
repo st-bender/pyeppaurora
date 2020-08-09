@@ -50,10 +50,16 @@ def berger1974(
 	scale_height, rho,
 	ens=E_BR, zm_p_en=Z_BR, coeffs=A_BR,
 	fillna=None, log3=True,
+	rbf="multiquadric",
 ):
 	"""Bremsstrahlung ionization by secondary electrons
 
 	Formulae and parameters as described in [2]_.
+
+	By default, the `log(coefficients)` are interpolated wrt. `log(energy)`
+	and `log(zm)` using :class:`scipy.interpolated.Rbf`.
+	The default "multiquadric" should work fine, if not consider
+	using "thin-plate" splines.
 
 	.. [2] Berger, M.J., Seltzer, S.M., Maeda, K.,
 		Some new results on electron transport in the atmosphere,
@@ -65,6 +71,7 @@ def berger1974(
 	----------
 	energy: array_like (M, ...)
 		Energy E_0 of the mono-energetic electron beam [keV].
+		A scalar (0-D) value is promoted to 1-D with one element.
 	flux: array_like (M,...)
 		Energy flux Q_0 of the mono-energetic electron beam [keV / cm² / s¹].
 		Has currently no effect, kept for compatibility with the other methods.
@@ -88,14 +95,23 @@ def berger1974(
 	log3: bool, optional (default `True`)
 		Interpolate the coefficients as log(ens)-log(zm)-log(coeff)
 		instead of a linear variant.
+	rbf: str or callable, optional (default "multiquadric")
+		Radial basis functions to use for :class:`scipy.interpolate.Rbf`.
 
 	Returns
 	-------
 	a_br: array_like (M, N)
-		[1. / (g cm⁻²)]
+		A scalar (0-D) `energy` is promoted to 1-D, and the result will
+		have shape (1, N), *not* (N,).
+		Units: [1. / (g cm⁻²)]
 		Multiply by density [g cm⁻³] and energy flux [keV cm⁻² s⁻¹]
 		to obtain energy dissipation flux.
+
+	See also
+	--------
+	scipy.interpolate.Rbf
 	"""
+	energy = np.atleast_1d(np.asarray(energy, dtype=float))
 	ens = np.asarray(ens)
 	zm_p_en = np.asarray(zm_p_en)
 
@@ -107,24 +123,22 @@ def berger1974(
 		nans = np.isnan(coeffs)
 
 	z = scale_height * rho / energy
-	if log3:
-		# use log of everything
-		energy = np.log(energy)
-		z = np.log(z)
-		ens = np.log(ens)
-		zm_p_en = np.log(zm_p_en)
-		coeffs = np.log(coeffs)
+	enp, _ = np.meshgrid(energy, rho, indexing="xy")
+
 	pts = [
-		(_e, _z)
+		(_e, _z, coeffs[_i, _j])
 		for _i, _e in enumerate(ens)
 		for _j, _z in enumerate(zm_p_en)
 		if not nans[_i, _j]
 	]
-	intp = interpolate.LinearNDInterpolator(
-		pts,
-		coeffs[~nans].ravel(),
-	)
-	abr_zm = intp((energy, z))
+	pts = np.array(pts, copy=False)
+
+	if log3:
+		enp = np.log(enp)
+		z = np.log(z)
+		pts = np.log(pts)
+	intp = interpolate.Rbf(*(pts.T), function=rbf)
+	abr_zm = intp(enp, z)
 
 	if log3:
 		abr_zm = np.exp(abr_zm)

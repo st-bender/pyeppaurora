@@ -12,7 +12,7 @@ EDISS_FUNCS_EXPECTED = [
 	(aur.fang2010_mono, 1.96516057e-007),
 	(aur.fang2010_maxw_int, 4.41340659e-07),
 	(aur.fang2013_protons, 4.09444686e-22),
-	(aur.berger1974, np.nan),
+	(aur.berger1974, 2.37365609e-03),
 ]
 
 
