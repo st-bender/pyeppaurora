@@ -36,6 +36,75 @@ def test_endiss(edissfunc, expected):
 	return
 
 
+@pytest.mark.parametrize(
+	"edissfunc, expected",
+	# exclude bremsstrahlung for now,
+	# scipy's rbf interpolation uses np.meshgrid
+	# which messes with the order of the dimensions
+	# and doesn't work for higher-dimensional arrays
+	EDISS_FUNCS_EXPECTED[:-1],
+)
+def test_endiss_transposed(edissfunc, expected):
+	energies = np.logspace(-1, 2, 4)
+	fluxes = np.ones_like(energies)
+	# ca. 100, 150, 200 km
+	scale_heights = np.array([6e5, 27e5, 40e5])
+	rhos = np.array([5e-10, 1.7e-12, 2.6e-13])
+	ediss = edissfunc(
+		energies[:, None], fluxes[:, None],
+		scale_heights[None, :], rhos[None, :]
+	)
+	assert ediss.shape == (4, 3)
+	np.testing.assert_allclose(ediss[2, 0], expected)
+	return
+
+
+@pytest.mark.parametrize(
+	"edissfunc, expected",
+	# exclude bremsstrahlung for now,
+	# scipy's rbf interpolation uses np.meshgrid
+	# which messes with the order of the dimensions
+	# and doesn't work for higher-dimensional arrays
+	EDISS_FUNCS_EXPECTED[:-1],
+)
+def test_endiss_3d(edissfunc, expected):
+	energies = np.logspace(-1, 2, 4)
+	fluxes = np.ones_like(energies)
+	# ca. 100, 150, 200 km
+	scale_heights = np.array([6e5, 27e5, 40e5])
+	rhos = np.array([5e-10, 1.7e-12, 2.6e-13])
+	ediss = edissfunc(
+		energies[None, None, :], fluxes[None, None, :],
+		scale_heights[:, None, None], rhos[:, None, None]
+	)
+	assert ediss.shape == (3, 1, 4)
+	np.testing.assert_allclose(ediss[0, 0, 2], expected)
+	return
+
+
+@pytest.mark.parametrize(
+	"edissfunc, expected",
+	# exclude bremsstrahlung for now,
+	# scipy's rbf interpolation uses np.meshgrid
+	# which messes with the order of the dimensions
+	# and doesn't work for higher-dimensional arrays
+	EDISS_FUNCS_EXPECTED[:-1],
+)
+def test_endiss_3d_transposed(edissfunc, expected):
+	energies = np.logspace(-1, 2, 4)
+	fluxes = np.ones_like(energies)
+	# ca. 100, 150, 200 km
+	scale_heights = np.array([6e5, 27e5, 40e5])
+	rhos = np.array([5e-10, 1.7e-12, 2.6e-13])
+	ediss = edissfunc(
+		energies[None, :, None], fluxes[None, :, None],
+		scale_heights[:, None, None], rhos[:, None, None]
+	)
+	assert ediss.shape == (3, 4, 1)
+	np.testing.assert_allclose(ediss[0, 2, 0], expected)
+	return
+
+
 def test_ssusi_ioniz():
 	energies = np.logspace(-1, 2, 4)
 	fluxes = np.ones_like(energies)
