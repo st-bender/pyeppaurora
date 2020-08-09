@@ -304,7 +304,7 @@ def fang2010_maxw_int(energy, flux, scale_height, rho, bounds=(0.1, 300.), nstep
 	"""
 	bounds_l10 = np.log10(bounds)
 	ens = np.logspace(*bounds_l10, num=nstep)
-	ensd = np.expand_dims(ens, axis=tuple(range(1, energy.ndim + 1)))
+	ensd = np.reshape(ens, (-1,) + (1,) * energy.ndim)
 	dflux = flux.T * maxwell_pflux(ensd, energy.T)
 	return fang2010_spec_int(ens, dflux.T, scale_height, rho, pij=pij, axis=-1)
 
