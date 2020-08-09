@@ -3,6 +3,7 @@
 **Atmospheric ionization from particle precipitation**
 
 [![builds](https://travis-ci.com/st-bender/pyeppaurora.svg?branch=master)](https://travis-ci.com/st-bender/pyeppaurora)
+[![docs](https://readthedocs.org/projects/pyeppaurora/badge/?version=latest)](https://pyeppaurora.readthedocs.io/en/latest/?badge=latest)
 [![package](https://img.shields.io/pypi/v/eppaurora.svg?style=flat)](https://pypi.org/project/eppaurora)
 [![wheel](https://img.shields.io/pypi/wheel/eppaurora.svg?style=flat)](https://pypi.org/project/eppaurora)
 [![pyversions](https://img.shields.io/pypi/pyversions/eppaurora.svg?style=flat)](https://pypi.org/project/eppaurora)
@@ -19,6 +20,8 @@ See [References](#references) for a list of included parametrizations.
 
 :warning: This package is in **alpha** stage, that is, it may or
 may not work, and the interface might change in future versions.
+
+Documentation is available at <https://pyeppaurora.readthedocs.io>.
 
 ## Install
 
