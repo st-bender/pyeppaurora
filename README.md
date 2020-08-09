@@ -1,4 +1,6 @@
-# Atmospheric ionization from particle precipitation
+# PyEPPAurora
+
+**Atmospheric ionization from particle precipitation**
 
 [![builds](https://travis-ci.com/st-bender/pyeppaurora.svg?branch=master)](https://travis-ci.com/st-bender/pyeppaurora)
 [![package](https://img.shields.io/pypi/v/eppaurora.svg?style=flat)](https://pypi.org/project/eppaurora)
