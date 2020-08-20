@@ -62,7 +62,7 @@ def test_endiss_scalar(edissfunc, expected):
 	# scipy's rbf interpolation uses np.meshgrid
 	# which messes with the order of the dimensions
 	# and doesn't work for higher-dimensional arrays
-	EDISS_FUNCS_EXPECTED[:-1],
+	EDISS_FUNCS_EXPECTED,
 )
 def test_endiss_transposed(edissfunc, expected):
 	energies = np.logspace(-1, 2, 4)
@@ -85,7 +85,7 @@ def test_endiss_transposed(edissfunc, expected):
 	# scipy's rbf interpolation uses np.meshgrid
 	# which messes with the order of the dimensions
 	# and doesn't work for higher-dimensional arrays
-	EDISS_FUNCS_EXPECTED[:-1],
+	EDISS_FUNCS_EXPECTED,
 )
 def test_endiss_3d(edissfunc, expected):
 	energies = np.logspace(-1, 2, 4)
@@ -108,7 +108,7 @@ def test_endiss_3d(edissfunc, expected):
 	# scipy's rbf interpolation uses np.meshgrid
 	# which messes with the order of the dimensions
 	# and doesn't work for higher-dimensional arrays
-	EDISS_FUNCS_EXPECTED[:-1],
+	EDISS_FUNCS_EXPECTED,
 )
 def test_endiss_3d_transposed(edissfunc, expected):
 	energies = np.logspace(-1, 2, 4)

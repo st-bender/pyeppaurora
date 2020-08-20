@@ -123,7 +123,8 @@ def berger1974(
 		nans = np.isnan(coeffs)
 
 	z = scale_height * rho / energy
-	enp, _ = np.meshgrid(energy, rho, indexing="xy")
+	# reshape by `numpy`'s automatic broacdasting to the same shape as z
+	enp = np.ones_like(scale_height) * np.ones_like(rho) * energy
 
 	pts = [
 		(_e, _z, coeffs[_i, _j])
@@ -138,7 +139,8 @@ def berger1974(
 		z = np.log(z)
 		pts = np.log(pts)
 	intp = interpolate.Rbf(*(pts.T), function=rbf)
-	abr_zm = intp(enp, z)
+	ez_pts = np.asarray(list(zip(enp, z)))
+	abr_zm = intp(ez_pts[:, 0], ez_pts[:, 1])
 
 	if log3:
 		abr_zm = np.exp(abr_zm)
