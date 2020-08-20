@@ -38,6 +38,26 @@ def test_endiss(edissfunc, expected):
 
 @pytest.mark.parametrize(
 	"edissfunc, expected",
+	EDISS_FUNCS_EXPECTED,
+)
+def test_endiss_scalar(edissfunc, expected):
+	energies = 10.
+	fluxes = 1.
+	# ca. 100, 150, 200 km
+	scale_heights = np.array([6e5, 27e5, 40e5])
+	rhos = np.array([5e-10, 1.7e-12, 2.6e-13])
+	# energy dissipation "profiles"
+	ediss = edissfunc(
+		energies, fluxes,
+		scale_heights[:, None], rhos[:, None]
+	)
+	assert ediss.shape == (3, 1)
+	np.testing.assert_allclose(ediss[0, 0], expected)
+	return
+
+
+@pytest.mark.parametrize(
+	"edissfunc, expected",
 	# exclude bremsstrahlung for now,
 	# scipy's rbf interpolation uses np.meshgrid
 	# which messes with the order of the dimensions
