@@ -278,13 +278,13 @@ def fang2010_maxw_int(energy, flux, scale_height, rho, bounds=(0.1, 300.), nstep
 
 	Parameters
 	----------
-	energy: array_like (M,...)
+	energy: float or array_like (M,...)
 		Characteristic energy E_0 [keV] of the Maxwellian distribution.
-	flux: array_like (M,...)
+	flux: float or array_like (M,...)
 		Integrated energy flux Q_0 [keV / cm² / s¹]
-	scale_height: array_like (N,...)
+	scale_height: float or array_like (N,...)
 		The atmospheric scale heights [cm].
-	rho: array_like (N,...)
+	rho: float or array_like (N,...)
 		The atmospheric mass density [g / cm³]
 	bounds: tuple, optional
 		(min, max) [keV] of the integration range to integrate the Maxwellian.
