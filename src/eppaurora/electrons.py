@@ -318,7 +318,7 @@ def maxwell_general(en, en_0=10.):
 
 	Parameters
 	----------
-	en: float
+	en: float or array_like (N,)
 		Energy in [keV]
 	en_0: float, optional
 		Characteristic energy in [keV], i.e. mode of the distribution.
@@ -326,11 +326,11 @@ def maxwell_general(en, en_0=10.):
 
 	Returns
 	-------
-	phi: float
-		Differential hemispherical number flux in [keV-1 cm-2 s-1]
-		([keV] or scaled by 1 keV-2 cm-2 s-1, e.g. ).
+	phi: float or array_like (N,)
+		Normalized differential hemispherical number flux at `en` in [keV-1 cm-2 s-1]
+		([keV] or scaled by 1 keV-2 cm-2 s-1, e.g.).
 	"""
-	return en * np.exp(-en / en_0)
+	return en / en_0**2 * np.exp(-en / en_0)
 
 
 def maxwell_pflux(en, en_0=10.):
@@ -342,7 +342,7 @@ def maxwell_pflux(en, en_0=10.):
 
 	Parameters
 	----------
-	en: float
+	en: float or array_like (N,)
 		Energy in [keV]
 	en_0: float, optional
 		Characteristic energy in [keV], i.e. mode of the distribution.
@@ -350,8 +350,8 @@ def maxwell_pflux(en, en_0=10.):
 
 	Returns
 	-------
-	phi: float
-		Hemispherical differential particle flux in [keV-1 cm-2 s-1]
+	phi: float or array_like (N,)
+		Hemispherical differential particle flux at `en` in [keV-1 cm-2 s-1]
 		([kev-2] scaled by unit energy flux).
 	"""
-	return 0.5 / en_0**3 * maxwell_general(en, en_0)
+	return 0.5 / en_0 * maxwell_general(en, en_0)
