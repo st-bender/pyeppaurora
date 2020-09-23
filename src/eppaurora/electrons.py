@@ -27,7 +27,7 @@ __all__ = [
 	"fang2010_spec_int",
 	"fang2010_maxw_int",
 	"maxwell_general",
-	"maxwell_pflux",
+	"pflux_maxwell",
 ]
 
 POLY_F2008 = [
@@ -307,7 +307,7 @@ def fang2010_maxw_int(energy, flux, scale_height, rho, bounds=(0.1, 300.), nstep
 	bounds_l10 = np.log10(bounds)
 	ens = np.logspace(*bounds_l10, num=nstep)
 	ensd = np.reshape(ens, (-1,) + (1,) * energy.ndim)
-	dflux = flux.T * maxwell_pflux(ensd, energy.T)
+	dflux = flux.T * pflux_maxwell(ensd, energy.T)
 	return fang2010_spec_int(ens, dflux.T, scale_height, rho, pij=pij, axis=-1)
 
 
@@ -333,8 +333,8 @@ def maxwell_general(en, en_0=10.):
 	return en / en_0**2 * np.exp(-en / en_0)
 
 
-def maxwell_pflux(en, en_0=10.):
-	"""Maxwell particle flux spectrum as in Fang2008 [1]
+def pflux_maxwell(en, en_0=10.):
+	r"""Maxwell particle flux spectrum as in Fang2008 [1]
 
 	Defined in Fang et al., JGR 2008, Eq. (1).
 	The total precipitating energy flux is fixed to 1 keV cm-2 s-1,
