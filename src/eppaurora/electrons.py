@@ -312,9 +312,10 @@ def fang2010_maxw_int(energy, flux, scale_height, rho, bounds=(0.1, 300.), nstep
 
 
 def maxwell_general(en, en_0=10.):
-	"""Maxwell number flux spectrum as in Fang2008 [1]
+	r"""Maxwell number flux spectrum as in Fang2008 [1]
 
-	Defined in Fang et al., JGR 2008, Eq. (1).
+	Defined in Fang et al., JGR 2008, Eq. (1),
+	normalized to :math:`\int_0^\infty \phi(E) \text{d}E = 1`.
 
 	Parameters
 	----------
@@ -339,6 +340,8 @@ def pflux_maxwell(en, en_0=10.):
 	Defined in Fang et al., JGR 2008, Eq. (1).
 	The total precipitating energy flux is fixed to 1 keV cm-2 s-1,
 	multiply by Q_0 [keV cm-2 s-1] to scale the particle flux.
+
+	Normalized to :math:`\int_0^\infty \phi(E) E \text{d}E = 1`.
 
 	Parameters
 	----------
