@@ -16,5 +16,6 @@ __version__ = "0.0.3"
 from .brems import *
 from .electrons import *
 from .protons import *
+from .spectra import *
 from .ssusi import *
 from .recombination import *

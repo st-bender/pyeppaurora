@@ -19,6 +19,8 @@ and medium-energy electron precipitation, 100 eV--1 MeV [1]_, [2]_, and [3]_.
 import numpy as np
 from numpy.polynomial.polynomial import polyval
 
+from .spectra import pflux_maxwell
+
 __all__ = [
 	"rr1987",
 	"rr1987_mod",
@@ -26,8 +28,6 @@ __all__ = [
 	"fang2010_mono",
 	"fang2010_spec_int",
 	"fang2010_maxw_int",
-	"maxwell_general",
-	"pflux_maxwell",
 ]
 
 POLY_F2008 = [
@@ -309,52 +309,3 @@ def fang2010_maxw_int(energy, flux, scale_height, rho, bounds=(0.1, 300.), nstep
 	ensd = np.reshape(ens, (-1,) + (1,) * energy.ndim)
 	dflux = flux.T * pflux_maxwell(ensd, energy.T)
 	return fang2010_spec_int(ens, dflux.T, scale_height, rho, pij=pij, axis=-1)
-
-
-def maxwell_general(en, en_0=10.):
-	r"""Maxwell number flux spectrum as in Fang2008 [1]
-
-	Defined in Fang et al., JGR 2008, Eq. (1),
-	normalized to :math:`\int_0^\infty \phi(E) \text{d}E = 1`.
-
-	Parameters
-	----------
-	en: float or array_like (N,)
-		Energy in [keV]
-	en_0: float, optional
-		Characteristic energy in [keV], i.e. mode of the distribution.
-		Default: 10 keV
-
-	Returns
-	-------
-	phi: float or array_like (N,)
-		Normalized differential hemispherical number flux at `en` in [keV-1 cm-2 s-1]
-		([keV] or scaled by 1 keV-2 cm-2 s-1, e.g.).
-	"""
-	return en / en_0**2 * np.exp(-en / en_0)
-
-
-def pflux_maxwell(en, en_0=10.):
-	r"""Maxwell particle flux spectrum as in Fang2008 [1]
-
-	Defined in Fang et al., JGR 2008, Eq. (1).
-	The total precipitating energy flux is fixed to 1 keV cm-2 s-1,
-	multiply by Q_0 [keV cm-2 s-1] to scale the particle flux.
-
-	Normalized to :math:`\int_0^\infty \phi(E) E \text{d}E = 1`.
-
-	Parameters
-	----------
-	en: float or array_like (N,)
-		Energy in [keV]
-	en_0: float, optional
-		Characteristic energy in [keV], i.e. mode of the distribution.
-		Default: 10 keV.
-
-	Returns
-	-------
-	phi: float or array_like (N,)
-		Hemispherical differential particle flux at `en` in [keV-1 cm-2 s-1]
-		([kev-2] scaled by unit energy flux).
-	"""
-	return 0.5 / en_0 * maxwell_general(en, en_0)
