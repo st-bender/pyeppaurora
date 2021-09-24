@@ -74,7 +74,6 @@ def berger1974(
 		A scalar (0-D) value is promoted to 1-D with one element.
 	flux: array_like (M,...)
 		Energy flux Q_0 of the mono-energetic electron beam [keV / cm² / s¹].
-		Has currently no effect, kept for compatibility with the other methods.
 	scale_height: array_like (N, ...)
 		The atmospheric scale heights [cm].
 	rho: array_like (N, ...)
@@ -103,9 +102,7 @@ def berger1974(
 	a_br: array_like (M, N)
 		A scalar (0-D) `energy` is promoted to 1-D, and the result will
 		have shape (1, N), *not* (N,).
-		Units: [1. / (g cm⁻²)]
-		Multiply by density [g cm⁻³] and energy flux [keV cm⁻² s⁻¹]
-		to obtain energy dissipation flux.
+		Energy dissipation rate, units: [keV cm⁻³ s⁻¹]
 
 	See also
 	--------
@@ -143,4 +140,4 @@ def berger1974(
 
 	if log3:
 		abr_zm = np.exp(abr_zm)
-	return abr_zm
+	return abr_zm * rho * flux
