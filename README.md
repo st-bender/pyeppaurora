@@ -33,7 +33,7 @@ Documentation is available at <https://pyeppaurora.readthedocs.io>.
 
 ### eppaurora
 
-An **experimental** `pip` package called `eppaurora` is available from the
+An installable `pip` package called `eppaurora` is available from the
 main package repository, it can be installed with:
 ```sh
 $ pip install eppaurora
