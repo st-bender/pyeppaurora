@@ -18,8 +18,8 @@ Includes also some recombination rate parametrizations to convert
 the ionization rates to electron densities in the upper atmosphere.
 See [References](#references) for a list of included parametrizations.
 
-:warning: This package is in **alpha** stage, that is, it may or
-may not work, and the interface might change in future versions.
+:warning: This package is in **beta** stage, that is, it works for the most part
+and the interface should not change (much) in future versions.
 
 Documentation is available at <https://pyeppaurora.readthedocs.io>.
 
