@@ -9,6 +9,14 @@ eppaurora.brems
    :undoc-members:
    :show-inheritance:
 
+eppaurora.conductivity
+----------------------
+
+.. automodule:: eppaurora.conductivity
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 eppaurora.electrons
 -------------------
 
