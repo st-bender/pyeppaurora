@@ -14,6 +14,7 @@ auroral (100 eV--30 keV) and radiation-belt (30 keV--1 MeV) electrons.
 __version__ = "0.1.0"
 
 from .brems import *
+from .conductivity import *
 from .electrons import *
 from .protons import *
 from .spectra import *
