@@ -58,10 +58,6 @@ def test_endiss_scalar(edissfunc, expected):
 
 @pytest.mark.parametrize(
 	"edissfunc, expected",
-	# exclude bremsstrahlung for now,
-	# scipy's rbf interpolation uses np.meshgrid
-	# which messes with the order of the dimensions
-	# and doesn't work for higher-dimensional arrays
 	EDISS_FUNCS_EXPECTED,
 )
 def test_endiss_transposed(edissfunc, expected):
@@ -81,10 +77,6 @@ def test_endiss_transposed(edissfunc, expected):
 
 @pytest.mark.parametrize(
 	"edissfunc, expected",
-	# exclude bremsstrahlung for now,
-	# scipy's rbf interpolation uses np.meshgrid
-	# which messes with the order of the dimensions
-	# and doesn't work for higher-dimensional arrays
 	EDISS_FUNCS_EXPECTED,
 )
 def test_endiss_3d(edissfunc, expected):
@@ -104,10 +96,6 @@ def test_endiss_3d(edissfunc, expected):
 
 @pytest.mark.parametrize(
 	"edissfunc, expected",
-	# exclude bremsstrahlung for now,
-	# scipy's rbf interpolation uses np.meshgrid
-	# which messes with the order of the dimensions
-	# and doesn't work for higher-dimensional arrays
 	EDISS_FUNCS_EXPECTED,
 )
 def test_endiss_3d_transposed(edissfunc, expected):
