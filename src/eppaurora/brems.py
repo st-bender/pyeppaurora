@@ -54,18 +54,12 @@ def berger1974(
 ):
 	"""Bremsstrahlung ionization by secondary electrons
 
-	Formulae and parameters as described in [2]_.
+	Formulae and parameters as described in [#]_.
 
 	By default, the `log(coefficients)` are interpolated wrt. `log(energy)`
 	and `log(zm)` using :class:`scipy.interpolated.Rbf`.
 	The default "multiquadric" should work fine, if not consider
 	using "thin-plate" splines.
-
-	.. [2] Berger, M.J., Seltzer, S.M., Maeda, K.,
-		Some new results on electron transport in the atmosphere,
-		Journal of Atmospheric and Terrestrial Physics, v36, i4, pp. 591--617,
-		April 1974,
-		doi: 10.1016/0021-9169(74)90085-3
 
 	Parameters
 	----------
@@ -103,6 +97,14 @@ def berger1974(
 		A scalar (0-D) `energy` is promoted to 1-D, and the result will
 		have shape (1, N), *not* (N,).
 		Energy dissipation rate, units: [keV cm⁻³ s⁻¹]
+
+	References
+	----------
+	.. [#] Berger, M.J., Seltzer, S.M., Maeda, K.,
+		Some new results on electron transport in the atmosphere,
+		Journal of Atmospheric and Terrestrial Physics, v36, i4, pp. 591--617,
+		April 1974,
+		doi: 10.1016/0021-9169(74)90085-3
 
 	See also
 	--------
