@@ -115,6 +115,7 @@ Basic class and method documentation is accessible via `pydoc`:
 ```sh
 $ pydoc eppaurora
 $ pydoc eppaurora.brems
+$ pydoc eppaurora.conductivity
 $ pydoc eppaurora.electrons
 $ pydoc eppaurora.protons
 $ pydoc eppaurora.recombination
@@ -148,6 +149,15 @@ doi: [10.1029/ja087ia07p05184](https://doi.org/10.1029/ja087ia07p05184)
 [7]: Gledhill, Radio Sci., 21, 3, 399-408,
 doi: [10.1029/rs021i003p00399](https://doi.org/10.1029/rs021i003p00399)  
 [8]: https://ssusi.jhuapl.edu/data_algorithms
+
+### Conductivity and conductance
+
+[9]: Brekke et al., J. Geophys. Res., 79(25), 3773--3790, Sept. 1974,
+doi: [10.1029/JA079i025p03773](https://doi.org/10.1029/JA079i025p03773)  
+[10]: Vickrey et al., J. Geophys. Res., 86(A1), 65--75, Jan. 1981,
+doi: [10.1029/JA086iA01p00065](https://doi.org/10.1029/JA086iA01p00065)  
+[11]: Robinson et al., J. Geophys. Res. Space Phys., 92(A3), 2565--2569, Mar. 1987,
+doi: [10.1029/JA092iA03p02565](https://doi.org/10.1029/JA092iA03p02565)  
 
 ## License
 
