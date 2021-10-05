@@ -251,6 +251,11 @@ def fang2010_spec_int(ens, dfluxes, scale_height, rho, pij=None, axis=-1):
 	rho: array_like (N,...)
 		The atmospheric densities, corresponding to the
 		scale heights.
+	pij: array_like (8, 4), optional
+		Polynomial coefficents for the electron energy dissipation
+		per atmospheric depth. Default: `None` (as given in the reference).
+	axis: int, optional
+		The axis to use for integration, default: -1 (last axis).
 
 	Returns
 	-------
@@ -298,6 +303,9 @@ def fang2010_maxw_int(energy, flux, scale_height, rho, bounds=(0.1, 300.), nstep
 		Default: (0.1, 300.)
 	nsteps: int, optional
 		Number of integration steps, default: 128.
+	pij: array_like (8, 4), optional
+		Polynomial coefficents for the electron energy dissipation
+		per atmospheric depth. Default: `None` (as given in the reference).
 
 	Returns
 	-------
