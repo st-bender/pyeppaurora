@@ -38,12 +38,12 @@ def ssusi_ioniz(z, en, flux, chmax=CHMAX_E, cpmax=CPMAX_E, eref=1., pref=2.57e3,
 	z: float, array_like
 	en: float, array_like
 	flux: float, array_like
-		Energy flux in [erg cm^{-2} s^{-2}], note: **not** keV.
+		Energy flux in [erg cm^{-2} s^{-1}], note: **not** keV.
 	chmax: tuple, list, (2,) optional
 		Pre-determined analytical model coefficients of peak auroral ionization production rate height.
 	cpmax: tuple, list, (3,) optional
 		Pre-determined analytical model coefficients of peak auroral ionization production rate
-		
+
 	Returns
 	-------
 	q: float, array_like
