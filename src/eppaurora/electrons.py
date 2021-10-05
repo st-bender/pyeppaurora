@@ -156,7 +156,7 @@ def _fang_f_y(_c, _y):
 	return ret
 
 
-def fang2008(energy, flux, scale_height, rho, pij=POLY_F2008):
+def fang2008(energy, flux, scale_height, rho, pij=None):
 	"""Atmospheric electron energy dissipation from Fang et al., 2008
 
 	Ionization profile parametrization as derived in Fang et al., 2008 [#]_.
@@ -182,7 +182,7 @@ def fang2008(energy, flux, scale_height, rho, pij=POLY_F2008):
 
 	.. [#] Fang et al., J. Geophys. Res., 113, A09311, 2008, doi: 10.1029/2008JA013384
 	"""
-	pij = np.asarray(pij)
+	pij = np.asarray(pij) or np.asarray(POLY_F2008)
 	# Fang et al., 2008, Eq. (7)
 	_cs = np.exp(polyval(np.log(energy), pij.T))
 	# Fang et al., 2008, Eq. (4)
@@ -193,7 +193,7 @@ def fang2008(energy, flux, scale_height, rho, pij=POLY_F2008):
 	return en_diss
 
 
-def fang2010_mono(energy, flux, scale_height, rho, pij=POLY_F2010):
+def fang2010_mono(energy, flux, scale_height, rho, pij=None):
 	r"""Atmospheric electron energy dissipation from Fang et al., 2010
 
 	Parametrization for mono-energetic electrons [#]_.
@@ -219,7 +219,7 @@ def fang2010_mono(energy, flux, scale_height, rho, pij=POLY_F2010):
 
 	.. [#] Fang et al., Geophys. Res. Lett., 37, L22106, 2010, doi: 10.1029/2010GL045406
 	"""
-	pij = np.asarray(pij)
+	pij = np.asarray(pij) or np.asarray(POLY_F2010)
 	# Fang et al., 2010, Eq. (5)
 	_cs = np.exp(polyval(np.log(energy), pij.T))
 	# Fang et al., 2010, Eq. (1)
@@ -230,7 +230,7 @@ def fang2010_mono(energy, flux, scale_height, rho, pij=POLY_F2010):
 	return en_diss
 
 
-def fang2010_spec_int(ens, dfluxes, scale_height, rho, pij=POLY_F2010, axis=-1):
+def fang2010_spec_int(ens, dfluxes, scale_height, rho, pij=None, axis=-1):
 	r"""Integrate over a given energy spectrum
 
 	Integrates over the mono-energetic parametrization `q` from Fang et al., 2010
@@ -269,7 +269,7 @@ def fang2010_spec_int(ens, dfluxes, scale_height, rho, pij=POLY_F2010, axis=-1):
 	return np.trapz(ediss_f10 * ens, ens, axis=axis)
 
 
-def fang2010_maxw_int(energy, flux, scale_height, rho, bounds=(0.1, 300.), nstep=128, pij=POLY_F2010):
+def fang2010_maxw_int(energy, flux, scale_height, rho, bounds=(0.1, 300.), nstep=128, pij=None):
 	"""Integrate Fang et al., 2010 over a Maxwellian spectrum
 
 	Integrates the mono-energetic parametrization from Fang et al., 2010 [#]_
