@@ -7,7 +7,7 @@
 # See accompanying LICENSE file or http://www.gnu.org/licenses/gpl-2.0.html.
 """Atmospheric ionization rate parametrizations
 
-From the SSUSI ATBD documents.
+From the SSUSI ATBD documents [#]_ [#]_ [#]_.
 
 .. [#] https://ssusi.jhuapl.edu/data_algorithms
 .. [#] https://ssusi.jhuapl.edu/docs/algorithms/Aurora_LID_c_Version_2.0.pdf
@@ -51,7 +51,6 @@ def ssusi_ioniz(z, en, flux, chmax=CHMAX_E, cpmax=CPMAX_E, eref=1., pref=2.57e3,
 
 	References
 	----------
-	
 	.. [#] https://ssusi.jhuapl.edu/docs/algorithms/Aurora_LID_c_Version_2.0.pdf
 	"""
 	# pre-determined scale height proportionality factor
