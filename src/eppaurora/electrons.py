@@ -235,7 +235,7 @@ def fang2010_mono(energy, flux, scale_height, rho, pij=None):
 def fang2010_spec_int(ens, dfluxes, scale_height, rho, pij=None, axis=-1):
 	r"""Integrate over a given energy spectrum
 
-	Integrates over the mono-energetic parametrization `q` from Fang et al., 2010
+	Integrates over the mono-energetic parametrization `q` from [#]_
 	using the given differential particle spectrum `phi`:
 
 	:math:`\int_\text{spec} \phi(E) q(E, Q) E \text{d}E`
@@ -256,6 +256,10 @@ def fang2010_spec_int(ens, dfluxes, scale_height, rho, pij=None, axis=-1):
 	-------
 	en_diss: array_like (N)
 		The dissipated energy profiles [keV].
+
+	References
+	----------
+	.. [#] Fang et al., Geophys. Res. Lett., 37, L22106, 2010, doi: 10.1029/2010GL045406
 
 	See Also
 	--------
