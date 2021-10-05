@@ -19,7 +19,7 @@ COND2_FUNCS_EXPECTED = [
 	"condfunc, expected",
 	COND1_FUNCS_EXPECTED,
 )
-def test_conductance(condfunc, expected):
+def test_conductivity(condfunc, expected):
 	_eV_J = 1.602176634e-19  # eV in J in new SI units
 	_erg_J = 1e-7  # 1 erg = 100 nJ
 	_erg_keV = _erg_J / _eV_J * 1e-3
@@ -55,7 +55,7 @@ def test_conductance(condfunc, expected):
 	"condfunc, expected",
 	COND2_FUNCS_EXPECTED,
 )
-def test_conductivity(condfunc, expected):
+def test_conductance(condfunc, expected):
 	energies = np.logspace(-1, 2, 4)  # keV
 	fluxes = np.ones_like(energies)  # ergs / cm² / s
 	# conductances
