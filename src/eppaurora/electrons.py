@@ -171,6 +171,9 @@ def fang2008(energy, flux, scale_height, rho, pij=None):
 		The atmospheric scale height(s) [cm].
 	rho: array_like (N,...)
 		The atmospheric densities [g / cm³], corresponding to the scale heights.
+	pij: array_like (8, 4), optional
+		Polynomial coefficents for the electron energy dissipation
+		per atmospheric depth. Default: `None` (as given in the reference).
 
 	Returns
 	-------
@@ -208,6 +211,9 @@ def fang2010_mono(energy, flux, scale_height, rho, pij=None):
 		The atmospheric scale heights [cm].
 	rho: array_like (N,...)
 		The atmospheric mass densities [g / cm³], corresponding to the scale heights.
+	pij: array_like (8, 4), optional
+		Polynomial coefficents for the electron energy dissipation
+		per atmospheric depth. Default: `None` (as given in the reference).
 
 	Returns
 	-------
