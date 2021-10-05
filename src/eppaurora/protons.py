@@ -38,9 +38,33 @@ POLY_F2013 = [
 
 
 def fang2013_protons(energy, flux, scale_height, rho, pij=None):
-	"""Proton ionization parametrization by Fang et al., 2013 [1]_
+	"""Proton ionization parametrization by Fang et al., 2013
 
-	.. [1] Fang, X., Lummerzheim, D., and Jackman, C. H. (2013),
+	Parametrization for mono-energetic protons as described in [#]_.
+
+	Parameters
+	----------
+	energy: array_like (M,...)
+		Energy E_0 of the mono-energetic proton beam [keV].
+	flux: array_like (M,...)
+		Energy flux Q_0 of the mono-energetic proton beam [keV / cm² / s¹].
+	scale_height: array_like (N,...)
+		The atmospheric scale heights [cm].
+	rho: array_like (N,...)
+		The atmospheric mass densities [g / cm³], corresponding to the scale heights.
+	pij: array_like (12, 4), optional
+		Polynomial coefficents for the proton energy dissipation
+		per atmospheric depth. Default: `None` (as given in the reference).
+
+	Returns
+	-------
+	en_diss: array_like (M,N)
+		The dissipated energy profiles [keV].
+
+	References
+	----------
+
+	.. [#] Fang, X., Lummerzheim, D., and Jackman, C. H. (2013),
 		Proton impact ionization and a fast calculation method,
 		J. Geophys. Res. Space Physics, 118, 5369--5378, doi:10.1002/jgra.50484.
 	"""
