@@ -76,7 +76,6 @@ def rr1987(energy, flux, scale_height, rho):
 
 	References
 	----------
-
 	.. [#] Roble and Ridley, Ann. Geophys., 5A(6), 369--382, 1987
 	"""
 	_c1 = 2.11685
@@ -122,7 +121,6 @@ def rr1987_mod(energy, flux, scale_height, rho):
 
 	References
 	----------
-
 	.. [#] Roble and Ridley, Ann. Geophys., 5A(6), 369--382, 1987
 	"""
 	# Modified polynomial, origin unknown
@@ -182,7 +180,6 @@ def fang2008(energy, flux, scale_height, rho, pij=None):
 
 	References
 	----------
-
 	.. [#] Fang et al., J. Geophys. Res., 113, A09311, 2008, doi: 10.1029/2008JA013384
 	"""
 	pij = np.asarray(pij) or np.asarray(POLY_F2008)
@@ -222,7 +219,6 @@ def fang2010_mono(energy, flux, scale_height, rho, pij=None):
 
 	References
 	----------
-
 	.. [#] Fang et al., Geophys. Res. Lett., 37, L22106, 2010, doi: 10.1029/2010GL045406
 	"""
 	pij = np.asarray(pij) or np.asarray(POLY_F2010)
@@ -303,6 +299,10 @@ def fang2010_maxw_int(energy, flux, scale_height, rho, bounds=(0.1, 300.), nstep
 	-------
 	en_diss: array_like (M,N)
 		The dissipated energy profiles [keV].
+
+	References
+	----------
+	.. [#] Fang et al., Geophys. Res. Lett., 37, L22106, 2010, doi: 10.1029/2010GL045406
 
 	See Also
 	--------
