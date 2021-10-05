@@ -37,7 +37,7 @@ POLY_F2013 = [
 ]
 
 
-def fang2013_protons(energy, flux, scale_height, rho, pij=POLY_F2013):
+def fang2013_protons(energy, flux, scale_height, rho, pij=None):
 	"""Proton ionization parametrization by Fang et al., 2013 [1]_
 
 	.. [1] Fang, X., Lummerzheim, D., and Jackman, C. H. (2013),
@@ -53,7 +53,7 @@ def fang2013_protons(energy, flux, scale_height, rho, pij=POLY_F2013):
 			_c[8] * (_y**_c[9]) * np.exp(-_c[10] * (_y**_c[11]))
 		)
 
-	pij = np.asarray(pij)
+	pij = np.asarray(pij) or np.asarray(POLY_F2013)
 	# Fang et al., 2013, Eqs. (6), (7)
 	_cs = np.exp(polyval(np.log(energy), pij.T))
 	# Fang et al., 2013, Eq. (5)
