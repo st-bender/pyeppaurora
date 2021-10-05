@@ -75,14 +75,14 @@ def berger1974(
 	ens: array_like (I,), optional
 		The energies (one axis) of the coefficient array,
 		used to interpolate the coefficients to `energy`.
-		Defaults to the Berger [2]_ coefficients.
+		Defaults to the Berger et al., 1974 coefficients.
 	zm_p_en: array_like (J,), optional
 		The atmospheric depth (the other axis) of the coefficient array,
 		used to interpolate the coefficients to `z` = `scale_height` * `rhos`.
-		Defaults to the Berger [2]_ coefficients.
+		Defaults to the Berger et al., 1974 coefficients.
 	coeffs: array_like, (J, I), optional
 		The bremsstrahlung energy dissipation coefficients.
-		Defaults to the Berger [2]_ coefficients.
+		Defaults to the Berger et al., 1974 coefficients.
 	fillna: float or None, optional (default `None`)
 		Value to use for `nan` values in `coeffs`, `None` skips them.
 	log3: bool, optional (default `True`)
