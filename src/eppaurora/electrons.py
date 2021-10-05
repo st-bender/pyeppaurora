@@ -306,7 +306,7 @@ def fang2010_maxw_int(energy, flux, scale_height, rho, bounds=(0.1, 300.), nstep
 
 	See Also
 	--------
-	fang2010_mono, fang2010_spec_int, maxwell_pflux
+	fang2010_mono, fang2010_spec_int, pflux_maxwell
 	"""
 	energy = np.asarray(energy)
 	flux = np.asarray(flux)
