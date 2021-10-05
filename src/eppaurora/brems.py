@@ -48,7 +48,7 @@ A_BR = [
 def berger1974(
 	energy, flux,
 	scale_height, rho,
-	ens=E_BR, zm_p_en=Z_BR, coeffs=A_BR,
+	ens=None, zm_p_en=None, coeffs=None,
 	fillna=None, log3=True,
 	rbf="multiquadric",
 ):
@@ -111,10 +111,13 @@ def berger1974(
 	scipy.interpolate.Rbf
 	"""
 	energy = np.atleast_1d(np.asarray(energy, dtype=float))
-	ens = np.asarray(ens)
-	zm_p_en = np.asarray(zm_p_en)
+	ens = np.asarray(ens) or np.asarray(E_BR)
+	zm_p_en = np.asarray(zm_p_en) or np.asarray(Z_BR)
 
-	coeffs = np.array(coeffs, copy=fillna is not None)
+	coeffs = (
+		np.array(coeffs, copy=fillna is not None)
+		or np.array(A_BR, copy=fillna is not None)
+	)
 	nans = np.isnan(coeffs)
 	if fillna is not None:
 		coeffs[nans] = fillna
