@@ -29,7 +29,7 @@ __all__ = [
 
 
 def alpha_vickrey1982(h):
-	u""" Vickrey et al. 1982 [1]_
+	u""" Vickrey et al. 1982 [#]_
 
 	Parameters
 	----------
@@ -41,14 +41,16 @@ def alpha_vickrey1982(h):
 	alpha: float or array_like
 		The recombination rate [cm³ s⁻¹].
 
-	.. [1] Vickrey et al., J. Geophys. Res. Space Phys.,
+	References
+	----------
+	.. [#] Vickrey et al., J. Geophys. Res. Space Phys.,
 		87, A7, 5184--5196, doi:10.1029/ja087ia07p05184
 	"""
 	return 2.5e-6 * np.exp(-h / 51.2)
 
 
 def alpha_gledhill1986_aurora(h):
-	""" Gledhill 1986, Aurora parameterization [1]_
+	""" Gledhill 1986, Aurora parameterization [#]_
 
 	Parameters
 	----------
@@ -60,13 +62,15 @@ def alpha_gledhill1986_aurora(h):
 	alpha: float or array_like
 		The recombination rate [cm³ s⁻¹].
 
-	.. [1] Radio Sci., 21, 3, 399-408, doi:10.1029/rs021i003p00399
+	References
+	----------
+	.. [#] Radio Sci., 21, 3, 399-408, doi:10.1029/rs021i003p00399
 	"""
 	return 4.3e-6 * np.exp(-2.42e-2 * h) + 8.16e12 * np.exp(-0.524 * h)
 
 
 def alpha_gledhill1986_day(h):
-	u""" Gledhill 1986, day-time parameterization [1]_
+	u""" Gledhill 1986, day-time parameterization [#]_
 
 	Parameters
 	----------
@@ -78,13 +82,15 @@ def alpha_gledhill1986_day(h):
 	alpha: float or array_like
 		The recombination rate [cm³ s⁻¹].
 
-	.. [1] Radio Sci., 21, 3, 399-408, doi:10.1029/rs021i003p00399
+	References
+	----------
+	.. [#] Radio Sci., 21, 3, 399-408, doi:10.1029/rs021i003p00399
 	"""
 	return 0.501 * np.exp(-0.165 * h)
 
 
 def alpha_gledhill1986_night(h):
-	""" Gledhill 1986, night-time parameterization [1]_
+	""" Gledhill 1986, night-time parameterization [#]_
 
 	Parameters
 	----------
@@ -96,14 +102,18 @@ def alpha_gledhill1986_night(h):
 	alpha: float or array_like
 		The recombination rate [cm³ s⁻¹].
 
-	.. [1] Radio Sci., 21, 3, 399-408, doi:10.1029/rs021i003p00399
+	References
+	----------
+	.. [#] Radio Sci., 21, 3, 399-408, doi:10.1029/rs021i003p00399
 	"""
 	return 652 * np.exp(-0.234 * h)
 
 
 def alpha_ssusi(z, alpha0=4.2e-7, scaleh=28.9, z0=108., z1=None):
-	u"""
-	Implements section 2.6.2.15 in [2]_.
+	u""" Recombination rate from the SSUSI algorithm [#]_
+
+	Implements section 2.6.2.15 from [#]_,
+	more details are also in [#]_.
 
 	Parameters
 	----------
@@ -129,9 +139,9 @@ def alpha_ssusi(z, alpha0=4.2e-7, scaleh=28.9, z0=108., z1=None):
 
 	References
 	----------
-	.. [1] https://ssusi.jhuapl.edu/data_algorithms
-	.. [2] https://ssusi.jhuapl.edu/docs/algorithms/Aurora_LID_c_Version_2.0.pdf
-	.. [3] https://ssusi.jhuapl.edu/docs/algorithms/SSUSI_DataProductAlgorithms_V1_13.doc
+	.. [#] https://ssusi.jhuapl.edu/data_algorithms
+	.. [#] https://ssusi.jhuapl.edu/docs/algorithms/Aurora_LID_c_Version_2.0.pdf
+	.. [#] https://ssusi.jhuapl.edu/docs/algorithms/SSUSI_DataProductAlgorithms_V1_13.doc
 	"""
 	alpha = np.zeros_like(z)
 	alpha[z < z0] = alpha0
