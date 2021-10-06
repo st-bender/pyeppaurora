@@ -23,6 +23,8 @@ __all__ = [
 	"pflux_gaussian",
 	"pflux_maxwell",
 	"pflux_pow",
+	"ediss_spec_int",
+	"ediss_specfun_int",
 ]
 
 
@@ -243,3 +245,137 @@ def pflux_pow(en, en_0=10., gamma=-3., het=True):
 		([kev-2] scaled by unit energy flux).
 	"""
 	return (gamma + 2) / (gamma + 1) / en_0 * pow_general(en, en_0=en_0, gamma=gamma, het=het)
+
+
+def ediss_spec_int(
+	ens,
+	dfluxes,
+	scale_height,
+	rho,
+	func,
+	axis=-1,
+	func_kws=None,
+):
+	r"""Integrate over a given energy spectrum
+
+	Integrates a mono-energetic parametrization `q`, e.g. from Fang et al., 2010
+	using the given differential particle spectrum `phi`:
+
+	:math:`\int_\text{spec} \phi(E) q(E, Q) E \text{d}E`
+
+	This function uses the differential spectrum evaluated at the given energy bins.
+
+	Parameters
+	----------
+	ens: array_like (M,...)
+		Central (bin) energies of the spectrum
+	dfluxes: array_like (M,...)
+		Differential particle fluxes in the given bins
+	scale_height: array_like (N,...)
+		The atmospheric scale heights
+	rho: array_like (N,...)
+		The atmospheric densities, corresponding to the
+		scale heights.
+	func: callable
+		Mono-energetic energy dissipation function to integrate.
+	axis: int, optional
+		The axis to use for integration, default: -1 (last axis).
+	func_kws: dict-like, optional
+		Optional keyword arguments to pass to the mono-energetic
+		energy dissipation function. Default: `None`
+
+	Returns
+	-------
+	en_diss: array_like (N)
+		The dissipated energy profiles [keV].
+
+	See Also
+	--------
+	ediss_specfun_int
+	"""
+	ens = np.atleast_1d(ens)
+	dfluxes = np.atleast_1d(dfluxes)
+	scale_height = np.atleast_1d(scale_height)
+	rho = np.atleast_1d(rho)
+	func_kws = func_kws or dict()
+	ediss = func(
+		ens[None, None, :],
+		dfluxes,
+		scale_height[..., None],
+		rho[..., None],
+		**func_kws,
+	)
+	return np.trapz(ediss * ens, ens, axis=axis)
+
+
+def ediss_specfun_int(
+	energy,
+	flux,
+	scale_height,
+	rho,
+	ediss_func,
+	ediss_kws=None,
+	bounds=(0.1, 300.),
+	nstep=128,
+	spec_fun=pflux_maxwell,
+	spec_kws=None,
+):
+	"""Integrate mono-energetic parametrization over a spectrum
+
+	Integrates the mono-energetic parametrization over a spectrum given by a
+	functional dependence with characteristic energy `energy` and total energy
+	flux `flux`.
+
+	Parameters
+	----------
+	energy: float or array_like (M,...)
+		Characteristic energy E_0 [keV] of the spectral distribution.
+	flux: float or array_like (M,...)
+		Integrated energy flux Q_0 [keV / cm² / s¹]
+	scale_height: float or array_like (N,...)
+		The atmospheric scale heights [cm].
+	rho: float or array_like (N,...)
+		The atmospheric mass density [g / cm³]
+	ediss_func: callable
+		Mono-energetic energy dissipation function to integrate.
+	ediss_kws: dict-like, optional
+		Optional keyword arguments to pass to the mono-energetic
+		energy dissipation function. Default: `None`
+	bounds: tuple, optional
+		(min, max) [keV] of the integration range to integrate the Maxwellian.
+		Make sure that this is appropriate to encompass the spectrum.
+		Default: (0.1, 300.)
+	nsteps: int, optional
+		Number of integration steps, default: 128.
+	spec_func: callable, optional, default :func:`pflux_maxwell`
+		Spectral shape function, choices are:
+		* :func:`pflux_exp` for a exponential spectrum
+		* :func:`pflux_gaussian` for a Gaussian shaped spectrum
+		* :func:`pflux_maxwell` for a Maxwellian shaped spectrum
+		* :func:`pflux_pow` for a power-law
+	spec_kws: dict-like, optional
+		Optional keyword arguments to pass to the spectral function
+		Default: `None`
+
+	Returns
+	-------
+	en_diss: array_like (M,N)
+		The dissipated energy profiles [keV].
+
+	See Also
+	--------
+	ediss_spec_int
+	"""
+	energy = np.asarray(energy)
+	flux = np.asarray(flux)
+	bounds_l10 = np.log10(bounds)
+	ens = np.logspace(*bounds_l10, num=nstep)
+	ensd = np.reshape(ens, (-1,) + (1,) * energy.ndim)
+	spec_kws = spec_kws or dict()
+	# "overwrite" the characteristic energy
+	spec_kws["en_0"] = energy.T
+	dflux = flux.T * spec_fun(ensd, **spec_kws)
+	return ediss_spec_int(
+		ens, dflux.T, scale_height, rho, ediss_func,
+		axis=-1, func_kws=ediss_kws,
+	)
