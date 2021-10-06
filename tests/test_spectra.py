@@ -25,8 +25,8 @@ PFLUX_ENORM = [
 )
 def test_nflux_norm(pflux_func):
 	energies = np.logspace(-2, 4, 257)
-	spec = pflux_func(energies)
-	norm = np.trapz(spec, energies)
+	dfluxes = pflux_func(energies)
+	norm = np.trapz(dfluxes, energies)
 	np.testing.assert_allclose(norm, 1., rtol=1e-3)
 	return
 
@@ -37,7 +37,7 @@ def test_nflux_norm(pflux_func):
 )
 def test_pflux_norm(pflux_func):
 	energies = np.logspace(-2, 4, 257)
-	spec = pflux_func(energies)
-	norm = np.trapz(spec * energies, energies)
+	dfluxes = pflux_func(energies)
+	norm = np.trapz(dfluxes * energies, energies)
 	np.testing.assert_allclose(norm, 1., rtol=1e-3)
 	return
