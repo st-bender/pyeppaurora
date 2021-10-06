@@ -303,7 +303,7 @@ def ediss_spec_int(
 		dfluxes,
 		scale_height[..., None],
 		rho[..., None],
-		**func_kws,
+		**func_kws
 	)
 	return np.trapz(ediss * ens, ens, axis=axis)
 
