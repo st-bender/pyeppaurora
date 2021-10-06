@@ -19,7 +19,7 @@ and medium-energy electron precipitation, 100 eV--1 MeV [1]_, [2]_, and [3]_.
 import numpy as np
 from numpy.polynomial.polynomial import polyval
 
-from .spectra import pflux_maxwell
+from .spectra import pflux_maxwell, ediss_spec_int, ediss_specfun_int
 
 __all__ = [
 	"rr1987",
@@ -268,16 +268,13 @@ def fang2010_spec_int(ens, dfluxes, scale_height, rho, pij=None, axis=-1):
 
 	See Also
 	--------
-	fang2010_mono
+	fang2010_mono, ediss_spec_int
 	"""
-	ediss_f10 = fang2010_mono(
-		ens[None, None, :],
-		dfluxes,
-		scale_height[..., None],
-		rho[..., None],
-		pij=pij,
+	return ediss_spec_int(
+		ens, dfluxes, scale_height, rho, fang2010_mono,
+		axis=axis,
+		func_kws=dict(pij=pij),
 	)
-	return np.trapz(ediss_f10 * ens, ens, axis=axis)
 
 
 def fang2010_maxw_int(energy, flux, scale_height, rho, bounds=(0.1, 300.), nstep=128, pij=None):
@@ -318,12 +315,12 @@ def fang2010_maxw_int(energy, flux, scale_height, rho, bounds=(0.1, 300.), nstep
 
 	See Also
 	--------
-	fang2010_mono, fang2010_spec_int, pflux_maxwell
+	fang2010_mono, fang2010_specfun_int, pflux_maxwell
 	"""
-	energy = np.asarray(energy)
-	flux = np.asarray(flux)
-	bounds_l10 = np.log10(bounds)
-	ens = np.logspace(*bounds_l10, num=nstep)
-	ensd = np.reshape(ens, (-1,) + (1,) * energy.ndim)
-	dflux = flux.T * pflux_maxwell(ensd, energy.T)
-	return fang2010_spec_int(ens, dflux.T, scale_height, rho, pij=pij, axis=-1)
+	return ediss_specfun_int(
+		energy, flux, scale_height, rho, fang2010_mono,
+		ediss_kws=dict(pij=pij),
+		bounds=bounds,
+		nstep=nstep,
+		spec_fun=pflux_maxwell,
+	)
