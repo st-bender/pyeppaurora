@@ -10,6 +10,7 @@ PFLUX_NNORM = [
 	spec.exp_general,
 	spec.gaussian_general,
 	spec.maxwell_general,
+	spec.pow_general,
 ]
 
 # unit energy flux
@@ -17,6 +18,7 @@ PFLUX_ENORM = [
 	spec.pflux_exp,
 	spec.pflux_gaussian,
 	spec.pflux_maxwell,
+	spec.pflux_pow,
 ]
 
 
@@ -25,10 +27,10 @@ PFLUX_ENORM = [
 	PFLUX_NNORM,
 )
 def test_nflux_norm(pflux_func):
-	energies = np.logspace(-2, 4, 257)
+	energies = np.logspace(-2, 6, 2049)
 	dfluxes = pflux_func(energies)
 	norm = np.trapz(dfluxes, energies)
-	np.testing.assert_allclose(norm, 1., rtol=1e-3)
+	np.testing.assert_allclose(norm, 1., rtol=1e-2)
 	return
 
 
@@ -37,16 +39,16 @@ def test_nflux_norm(pflux_func):
 	PFLUX_ENORM,
 )
 def test_pflux_norm(pflux_func):
-	energies = np.logspace(-2, 4, 257)
+	energies = np.logspace(-2, 6, 1025)
 	dfluxes = pflux_func(energies)
 	norm = np.trapz(dfluxes * energies, energies)
-	np.testing.assert_allclose(norm, 1., rtol=1e-3)
+	np.testing.assert_allclose(norm, 1., rtol=1e-2)
 	return
 
 
 @pytest.mark.parametrize(
 	"pflux_func",
-	PFLUX_ENORM + [spec.pflux_pow],
+	PFLUX_ENORM,
 )
 def test_ediss_spec_int(pflux_func):
 	energies = np.logspace(-2, 4, 257)
@@ -62,7 +64,7 @@ def test_ediss_spec_int(pflux_func):
 
 @pytest.mark.parametrize(
 	"pflux_func",
-	PFLUX_ENORM + [spec.pflux_pow],
+	PFLUX_ENORM,
 )
 def test_ediss_specfun_int(pflux_func):
 	energies = np.logspace(-1, 2, 4)
