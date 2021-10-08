@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import numpy as np
 import pytest
+from scipy.integrate import quad
 
 import eppaurora.spectra as spec
 from eppaurora.electrons import fang2010_mono
@@ -27,10 +28,8 @@ PFLUX_ENORM = [
 	PFLUX_NNORM,
 )
 def test_nflux_norm(pflux_func):
-	energies = np.logspace(-2, 6, 2049)
-	dfluxes = pflux_func(energies)
-	norm = np.trapz(dfluxes, energies)
-	np.testing.assert_allclose(norm, 1., rtol=1e-2)
+	norm = quad(pflux_func, 0., np.inf)[0]
+	np.testing.assert_allclose(norm, 1., rtol=1e-9)
 	return
 
 
@@ -39,10 +38,8 @@ def test_nflux_norm(pflux_func):
 	PFLUX_ENORM,
 )
 def test_pflux_norm(pflux_func):
-	energies = np.logspace(-2, 6, 1025)
-	dfluxes = pflux_func(energies)
-	norm = np.trapz(dfluxes * energies, energies)
-	np.testing.assert_allclose(norm, 1., rtol=1e-2)
+	norm = quad(lambda x: x * pflux_func(x), 0., np.inf)[0]
+	np.testing.assert_allclose(norm, 1., rtol=1e-9)
 	return
 
 
