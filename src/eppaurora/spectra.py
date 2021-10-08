@@ -168,12 +168,14 @@ def pow_general(en, en_0=10., gamma=-3., het=True):
 		J. Geophys. Res., 98(A12), pp. 21533--21548, 1993
 		doi: `10.1029/93JA01645 <https://doi.org/10.1029/93JA01645>`_
 	"""
+	isscalar = (np.ndim(en) == 0)
+	en = np.atleast_1d(en)
 	spec = (gamma + 1) / en_0 * (en / en_0)**gamma
 	if het:
 		spec[en < en_0] = 0.
-		return -spec
+		return -spec[0] if isscalar else -spec
 	spec[en > en_0] = 0.
-	return spec
+	return spec[0] if isscalar else spec
 
 
 def pflux_exp(en, en_0=10.):
