@@ -41,6 +41,14 @@ eppaurora.recombination
    :undoc-members:
    :show-inheritance:
 
+eppaurora.spectra
+-----------------
+
+.. automodule:: eppaurora.spectra
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 eppaurora.ssusi
 ---------------
 
