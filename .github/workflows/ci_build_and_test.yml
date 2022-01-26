@@ -10,11 +10,12 @@ on:
 
 jobs:
   build_and_test:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
 
     strategy:
       fail-fast: false
       matrix:
+        os: [ubuntu-latest]
         python-version: ["2.7", "3.5", "3.6", "3.7", "3.8", "3.9", "3.10"]
 
     steps:
@@ -25,7 +26,7 @@ jobs:
           path: ~/.cache/pip
           restore-keys: |
             ${{ runner.os }}-pip-
-      - name: Set up Python ${{ matrix.python-version }}
+      - name: Set up Python ${{ matrix.python-version }} on ${{ matrix.os }}
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
@@ -52,7 +53,7 @@ jobs:
         uses: codecov/codecov-action@v2
 
       - name: Upload to Coveralls
-        if: matrix.python-version != '2.7'
+        if: startsWith(matrix.os, 'ubuntu') && matrix.python-version != '2.7'
         run: |
           python -m coveralls --service=github
         env:
