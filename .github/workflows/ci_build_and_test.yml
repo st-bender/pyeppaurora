@@ -31,7 +31,9 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - run: lsb_release -a
+        if: startsWith(matrix.os, 'ubuntu')
       - run: uname -a
+        if: startsWith(matrix.os, 'ubuntu')
       - run: python --version
       - name: Install dependencies
         run: |
