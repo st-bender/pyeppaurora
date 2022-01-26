@@ -21,6 +21,9 @@ jobs:
           - name: macos
             os: macos-latest
             python-version: "3.x"
+          - name: windows
+            os: windows-latest
+            python-version: "3.x"
 
     steps:
       - uses: actions/checkout@v2
