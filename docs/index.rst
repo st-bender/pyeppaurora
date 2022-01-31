@@ -10,8 +10,8 @@ Atmospheric ionization from particle precipitation
 
 The source code is `developed on Github <https://github.com/st-bender/pyeppaurora>`_.
 
-.. image:: https://travis-ci.com/st-bender/pyeppaurora.svg?branch=master
-    :target: https://travis-ci.com/st-bender/pyeppaurora
+.. image:: https://github.com/st-bender/pyeppaurora/actions/workflows/ci_build_and_test.yml/badge.svg?branch=master
+    :target: https://github.com/st-bender/pyeppaurora/actions/workflows/ci_build_and_test.yml
     :alt: builds
 .. image:: https://readthedocs.org/projects/pyeppaurora/badge/?version=latest
     :target: https://pyeppaurora.readthedocs.io/en/latest/?badge=latest
