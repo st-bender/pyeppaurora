@@ -60,7 +60,9 @@ def ssusiq2023(gmlat, mlt, alt, sw_coeffs, coeff_ds=None, return_var=False):
 		log(q) and var(log(q)) where q is the ionization rate in [cm⁻³ s⁻¹]
 		if `return_var` is True.
 	"""
-	coeff_ds = coeff_ds or xr.open_dataset(COEFF_PATH, decode_times=False)
+	coeff_ds = coeff_ds or xr.open_dataset(
+		COEFF_PATH, decode_times=False, engine="h5netcdf"
+	)
 	coeff_sel = coeff_ds.sel(
 		altitude=alt, latitude=gmlat, mlt=mlt, method="nearest",
 	)
