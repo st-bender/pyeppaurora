@@ -71,7 +71,7 @@ def ssusiq2023(gmlat, mlt, alt, sw_coeffs, coeff_ds=None, return_var=False):
 	if isinstance(sw_coeffs, xr.DataArray):
 		if "offset" in coeff_ds.proxy.values:
 			ones = xr.ones_like(sw_coeffs.isel(proxy=0))
-			ones = ones.assign_coords({"proxy": "offset"})
+			ones = ones.assign_coords(proxy="offset")
 			sw_coeffs = xr.concat([sw_coeffs, ones], dim="proxy")
 	else:
 		sw_coeffs = np.atleast_2d(sw_coeffs)
