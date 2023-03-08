@@ -9,6 +9,7 @@ meta_path = path.join("src", name, "__init__.py")
 here = path.abspath(path.dirname(__file__))
 
 extras_require = {
+	"models": ["netCDF4", "xarray"],
 	"tests": ["pytest"],
 }
 extras_require["all"] = sorted(
@@ -69,6 +70,11 @@ if __name__ == "__main__":
 		],
 		packages=find_packages("src"),
 		package_dir={"": "src"},
+		package_data={
+			name + ".models": [
+				"models/data/SSUSI_IRgrid_coeffs_f17f18.nc",
+			],
+		},
 		include_package_data=True,
 		install_requires=[
 			"numpy>=1.13.0",
