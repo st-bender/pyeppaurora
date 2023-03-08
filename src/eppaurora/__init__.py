@@ -11,7 +11,7 @@ Bundles some of the parametrizations for middle and upper atmospheric
 ionization and recombination rates for precipitating
 auroral (100 eV--30 keV) and radiation-belt (30 keV--1 MeV) electrons.
 """
-__version__ = "0.2.0"
+__version__ = "0.3.0.dev"
 
 from .brems import *
 from .conductivity import *
