@@ -46,6 +46,10 @@ jobs:
         run: |
           pip install -U pytest pytest-cov codecov coveralls
           pip install scrutinizer-ocular
+      - name: Downgrade importlib for Py37
+        if: matrix.python-version == '3.7'
+        run: |
+          pip install "importlib-metadata<5"
       - name: Install package
         run: |
           pip install -e ".[all]"
