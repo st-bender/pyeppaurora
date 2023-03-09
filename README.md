@@ -29,6 +29,8 @@ Documentation is available at <https://pyeppaurora.readthedocs.io>.
 
 - `numpy` - required
 - `scipy` - required for 2-D interpolation
+- `h5netcdf` - optional for the empirical models, install with `eppaurora[models]`
+- `xarray` - optional for the empirical models, install with `eppaurora[models]`
 - `pytest` - optional, for testing
 
 ### eppaurora
