@@ -67,15 +67,23 @@ def ssusiq2023(gmlat, mlt, alt, sw_coeffs, coeff_ds=None, return_var=False):
 		altitude=alt, latitude=gmlat, mlt=mlt, method="nearest",
 	)
 
+	# Determine if `xarray` read bytes or strings to
+	# match the correct name in the proxy names.
+	# Default is plain strings.
+	offset = "offset"
+	if isinstance(coeff_ds.proxy.values[0], bytes):
+		offset = offset.encode()
+	have_offset = offset in coeff_ds.proxy.values
+
 	# prepare the coefficients (array) as a `xarray.DataArray`
 	if isinstance(sw_coeffs, xr.DataArray):
-		if "offset" in coeff_ds.proxy.values:
+		if have_offset:
 			ones = xr.ones_like(sw_coeffs.isel(proxy=0))
 			ones = ones.assign_coords(proxy="offset")
 			sw_coeffs = xr.concat([sw_coeffs, ones], dim="proxy")
 	else:
 		sw_coeffs = np.atleast_2d(sw_coeffs)
-		if "offset" in coeff_ds.proxy.values:
+		if have_offset:
 			aix = sw_coeffs.shape.index(len(coeff_ds.proxy.values) - 1)
 			if aix != 0:
 				sw_coeffs = sw_coeffs.T
