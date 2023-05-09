@@ -13,6 +13,7 @@ derived from SSUSI UV observations [1]_.
 
 .. [1] Bender et al., in prep., 2023
 """
+from logging import warning as warn
 from os import path
 from pkg_resources import resource_filename
 
@@ -86,12 +87,28 @@ def ssusiq2023(gmlat, mlt, alt, sw_coeffs, coeff_ds=None, return_var=False):
 		if have_offset:
 			aix = sw_coeffs.shape.index(len(coeff_ds.proxy.values) - 1)
 			if aix != 0:
-				sw_coeffs = sw_coeffs.T
+				warn(
+					"Automatically changing axis. "
+					"This is ambiguous, to remove the ambiguity, "
+					"make sure that the different indexes (proxies) "
+					"are ordered along the zero-th axis in multi-"
+					"dimensional settings. I.e. each row corresponds "
+					"to a different index, Kp, PC, Ap, etc."
+				)
+				sw_coeffs = sw_coeffs.swapaxes(aix, 0)
 			sw_coeffs = np.vstack([sw_coeffs, np.ones(sw_coeffs.shape[1])])
 		else:
 			aix = sw_coeffs.shape.index(len(coeff_ds.proxy.values))
 			if aix != 0:
-				sw_coeffs = sw_coeffs.T
+				warn(
+					"Automatically changing axis. "
+					"This is ambiguous, to remove the ambiguity, "
+					"make sure that the different indexes (proxies) "
+					"are ordered along the zero-th axis in multi-"
+					"dimensional settings. I.e. each row corresponds "
+					"to a different index, Kp, PC, Ap, etc."
+				)
+				sw_coeffs = sw_coeffs.swapaxes(aix, 0)
 		extra_dims = ["dim_{0}".format(_d) for _d in range(sw_coeffs.ndim - 1)]
 		sw_coeffs = xr.DataArray(
 			sw_coeffs,
