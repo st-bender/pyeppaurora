@@ -89,9 +89,17 @@ def test_ssusiq2023_xrda_2d():
 			dims=["proxy", "time"],
 			coords={"proxy": ["Kp", "PC", "Ap", "log_f107_81ctr_obs", "log_v_plasma"]},
 		),
+		coeff_ds=COEFF_DS,
 		return_var=True,
 	)
 	assert res[0].shape == (2,)
+	np.testing.assert_allclose(
+		res[0],
+		np.array([
+			2.333 + 2. + 60. + 8. + 10. + 6.,
+			3.333 + 4. + 150. + 16. + 15. + 6.,
+		])
+	)
 
 
 def test_ssusiq2023_xrda_3d():
