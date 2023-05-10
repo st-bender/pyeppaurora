@@ -120,6 +120,11 @@ def ssusiq2023(gmlat, mlt, alt, sw_coeffs, coeff_ds=None, return_var=False):
 	# fill NaNs with zero for `.dot()`
 	coeffs = coeff_sel.beta.fillna(0.)
 	q = coeffs.dot(sw_coeffs)
+	q = q.rename("log_q")
+	q.attrs = {
+		"long_name": "natural logarithm of ionization rate",
+		"units": "log(cm-3 s-1)",
+	}
 	if not return_var:
 		return q
 
@@ -127,4 +132,9 @@ def ssusiq2023(gmlat, mlt, alt, sw_coeffs, coeff_ds=None, return_var=False):
 	# fill NaNs with zero for `.dot()`
 	coeffv = coeff_sel.beta_std.fillna(0.)**2
 	q_var = coeffv.dot(sw_coeffs**2)
+	q_var = q_var.rename("var_log_q")
+	q_var.attrs = {
+		"long_name": "variance of the natural logarithm of ionization rate",
+		"units": "1",
+	}
 	return q, q_var
