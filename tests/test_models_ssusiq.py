@@ -118,7 +118,7 @@ def test_ssusiq2023_xrda_3d():
 def test_ssusiq2023_vec():
 	res = aurmod.ssusiq2023(
 		[66.6, 70.2], [3, 5, 7], [100., 105., 110., 115.],
-		[[2.333], [1], [20], [2], [2]],
+		[[2.333], [1], [20], [2]],
 		return_var=True,
 	)
 	assert res[0].shape == (3, 2, 4, 1)
