@@ -72,9 +72,9 @@ def ssusiq2023(gmlat, mlt, alt, sw_coeffs, coeff_ds=None, return_var=False):
 	# match the correct name in the proxy names.
 	# Default is plain strings.
 	offset = "offset"
-	if isinstance(coeff_ds.proxy.values[0], bytes):
+	if isinstance(coeff_sel.proxy.values[0], bytes):
 		offset = offset.encode()
-	have_offset = offset in coeff_ds.proxy.values
+	have_offset = offset in coeff_sel.proxy.values
 
 	# prepare the coefficients (array) as a `xarray.DataArray`
 	if isinstance(sw_coeffs, xr.DataArray):
@@ -86,7 +86,7 @@ def ssusiq2023(gmlat, mlt, alt, sw_coeffs, coeff_ds=None, return_var=False):
 	else:
 		sw_coeffs = np.atleast_2d(sw_coeffs)
 		if have_offset:
-			aix = sw_coeffs.shape.index(len(coeff_ds.proxy.values) - 1)
+			aix = sw_coeffs.shape.index(len(coeff_sel.proxy.values) - 1)
 			if aix != 0:
 				warn(
 					"Automatically changing axis. "
@@ -99,7 +99,7 @@ def ssusiq2023(gmlat, mlt, alt, sw_coeffs, coeff_ds=None, return_var=False):
 				sw_coeffs = sw_coeffs.swapaxes(aix, 0)
 			sw_coeffs = np.vstack([sw_coeffs, np.ones(sw_coeffs.shape[1])])
 		else:
-			aix = sw_coeffs.shape.index(len(coeff_ds.proxy.values))
+			aix = sw_coeffs.shape.index(len(coeff_sel.proxy.values))
 			if aix != 0:
 				warn(
 					"Automatically changing axis. "
@@ -114,7 +114,7 @@ def ssusiq2023(gmlat, mlt, alt, sw_coeffs, coeff_ds=None, return_var=False):
 		sw_coeffs = xr.DataArray(
 			sw_coeffs,
 			dims=["proxy"] + extra_dims,
-			coords={"proxy": coeff_ds.proxy.values},
+			coords={"proxy": coeff_sel.proxy.values},
 		)
 
 	# Calculate model (mean) values from `beta`
