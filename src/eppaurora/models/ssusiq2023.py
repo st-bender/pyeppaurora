@@ -48,6 +48,10 @@ def ssusiq2023(gmlat, mlt, alt, sw_coeffs, coeff_ds=None, interpolate=False, ret
 		All the other dimensions will be broadcasted.
 	coeff_ds: `xarray.Dataset`, optional (default: None)
 		Dataset with the model coefficients, `None` uses the packaged version.
+	interpolate: bool, optional (default: False)
+		If `True`, uses bilinear interpolate in MLT and geomagnetic latitude,
+		using periodic (24h) boundary conditions in MLT. Otherwise, the closest
+		MLT/geomagnetic latitude bin will be selected.
 	return_var: bool, optional (default: False)
 		If `True`, returns the predicted variance in addition to the values,
 		otherwise only the mean prediction is returned.
