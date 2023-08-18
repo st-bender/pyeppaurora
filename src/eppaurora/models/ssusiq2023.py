@@ -161,6 +161,10 @@ def ssusiq2023(
 	# fill NaNs with zero for `.dot()`
 	coeffv = coeff_sel.beta_std.fillna(0.)**2
 	q_var = coeffv.dot(sw_coeffs**2)
+	if "sigma2" in coeff_sel.data_vars:
+		# if available, add the posterior variance
+		# to get the full posterior predictive variance
+		q_var = coeff_sel["sigma2"] + q_var
 	q_var = q_var.rename("var_log_q")
 	q_var.attrs = {
 		"long_name": "variance of the natural logarithm of ionization rate",
