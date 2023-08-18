@@ -28,7 +28,7 @@ COEFF_FILE = "SSUSI_IRgrid_coeffs_f17f18.nc"
 COEFF_PATH = resource_filename(__name__, path.join("data", COEFF_FILE))
 
 
-def ssusiq2023(gmlat, mlt, alt, sw_coeffs, coeff_ds=None, return_var=False):
+def ssusiq2023(gmlat, mlt, alt, sw_coeffs, coeff_ds=None, interpolate=False, return_var=False):
 	u"""
 	Parameters
 	----------
@@ -64,9 +64,21 @@ def ssusiq2023(gmlat, mlt, alt, sw_coeffs, coeff_ds=None, return_var=False):
 	coeff_ds = coeff_ds or xr.open_dataset(
 		COEFF_PATH, decode_times=False, engine="h5netcdf"
 	)
-	coeff_sel = coeff_ds.sel(
-		altitude=alt, latitude=gmlat, mlt=mlt, method="nearest",
-	)
+	coeff_sel = coeff_ds.sel(altitude=alt)
+	if interpolate:
+		_ds_m = coeff_sel.assign_coords(mlt=coeff_sel.mlt - 24)
+		_ds_p = coeff_sel.assign_coords(mlt=coeff_sel.mlt + 24)
+		_ds_mp = xr.concat([_ds_m, coeff_sel, _ds_p], dim="mlt")
+		# square the standard deviation for interpolation
+		_ds_mp["beta_var"] = _ds_mp["beta_std"]**2
+		coeff_sel = _ds_mp.interp(
+			latitude=gmlat, mlt=mlt,
+			method="linear",
+		)
+		# and square root back to get the standard deviation
+		coeff_sel["beta_std"] = np.sqrt(coeff_sel["beta_var"])
+	else:
+		coeff_sel = coeff_sel.sel(latitude=gmlat, mlt=mlt, method="nearest")
 
 	# Determine if `xarray` read bytes or strings to
 	# match the correct name in the proxy names.
