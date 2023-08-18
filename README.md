@@ -11,6 +11,8 @@
 [![coveralls](https://coveralls.io/repos/github/st-bender/pyeppaurora/badge.svg)](https://coveralls.io/github/st-bender/pyeppaurora)
 [![scrutinizer](https://scrutinizer-ci.com/g/st-bender/pyeppaurora/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/st-bender/pyeppaurora/?branch=master)
 
+[![doi](https://zenodo.org/badge/DOI/10.5281/zenodo.4298136.svg)](https://doi.org/10.5281/zenodo.4298136)
+
 Bundles some of the parametrizations for middle and upper atmospheric
 ionization and recombination rates for precipitating
 auroral and radiation-belt electrons as well as protons.
