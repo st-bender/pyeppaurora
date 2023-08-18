@@ -35,6 +35,7 @@ def ssusiq2023(
 	sw_coeffs,
 	coeff_ds=None,
 	interpolate=False,
+	method="linear",
 	return_var=False,
 ):
 	u"""
@@ -60,6 +61,9 @@ def ssusiq2023(
 		If `True`, uses bilinear interpolate in MLT and geomagnetic latitude,
 		using periodic (24h) boundary conditions in MLT. Otherwise, the closest
 		MLT/geomagnetic latitude bin will be selected.
+	method: str, optional (default: "linear")
+		Interpolation method to use, see `scipy.interpolate.interpn` for options.
+		Only used if `interpolate` is `True`.
 	return_var: bool, optional (default: False)
 		If `True`, returns the predicted variance in addition to the values,
 		otherwise only the mean prediction is returned.
@@ -85,7 +89,7 @@ def ssusiq2023(
 		_ds_mp["beta_var"] = _ds_mp["beta_std"]**2
 		coeff_sel = _ds_mp.interp(
 			latitude=gmlat, mlt=mlt,
-			method="linear",
+			method=method,
 		)
 		# and square root back to get the standard deviation
 		coeff_sel["beta_std"] = np.sqrt(coeff_sel["beta_var"])
