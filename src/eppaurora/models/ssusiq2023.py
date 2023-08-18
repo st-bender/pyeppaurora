@@ -28,7 +28,15 @@ COEFF_FILE = "SSUSI_IRgrid_coeffs_f17f18.nc"
 COEFF_PATH = resource_filename(__name__, path.join("data", COEFF_FILE))
 
 
-def ssusiq2023(gmlat, mlt, alt, sw_coeffs, coeff_ds=None, interpolate=False, return_var=False):
+def ssusiq2023(
+	gmlat,
+	mlt,
+	alt,
+	sw_coeffs,
+	coeff_ds=None,
+	interpolate=False,
+	return_var=False,
+):
 	u"""
 	Parameters
 	----------
