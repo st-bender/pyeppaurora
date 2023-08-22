@@ -8,6 +8,10 @@ v0.3.0 (unreleased)
 
 - Includes the SSUSI ionization rates empirical model
 
+### Changes
+
+- CI fixes
+
 
 v0.2.0 (2022-01-25)
 -------------------
