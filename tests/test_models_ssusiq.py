@@ -102,7 +102,11 @@ def test_ssusiq2023_xrda_2d():
 	)
 
 
-def test_ssusiq2023_xrda_3d():
+@pytest.mark.parametrize(
+	"interpolate, method",
+	[(False, None), (True, "linear"), (True, "cubic")],
+)
+def test_ssusiq2023_xrda_3d(interpolate, method):
 	res = aurmod.ssusiq2023(
 		70.2, 3, 100.,
 		xr.DataArray(
@@ -110,15 +114,23 @@ def test_ssusiq2023_xrda_3d():
 			dims=["model", "proxy", "time"],
 			coords={"proxy": ["Kp", "PC", "Ap", "log_f107_81ctr_obs", "log_v_plasma"]},
 		),
+		interpolate=interpolate,
+		method=method,
 		return_var=True,
 	)
 	assert res[0].shape == (1, 2)
 
 
-def test_ssusiq2023_vec():
+@pytest.mark.parametrize(
+	"interpolate, method",
+	[(False, None), (True, "linear"), (True, "cubic")],
+)
+def test_ssusiq2023_vec(interpolate, method):
 	res = aurmod.ssusiq2023(
 		[66.6, 70.2], [3, 5, 7], [100., 105., 110., 115.],
 		[[2.333], [1], [20], [2]],
+		interpolate=interpolate,
+		method=method,
 		return_var=True,
 	)
 	assert res[0].shape == (3, 2, 4, 1)
