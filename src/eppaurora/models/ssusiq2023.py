@@ -37,7 +37,9 @@ def _interp(ds, method="linear", method_non_numeric="nearest", **kwargs):
 	v_nn = sorted(set(ds) - set(v_n))
 	ds_n = ds[v_n].interp(method=method, **kwargs)
 	ds_nn = ds[v_nn].sel(method=method_non_numeric, **kwargs)
-	return xr.merge([ds_n, ds_nn], join="left", compat="override")
+	# override coordinates for `merge()`
+	ds_nn = ds_nn.assign_coords(**ds_n.coords)
+	return xr.merge([ds_n, ds_nn], join="left")
 
 
 def ssusiq2023(
