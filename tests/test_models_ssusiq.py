@@ -104,7 +104,17 @@ def test_ssusiq2023_xrda_2d():
 
 @pytest.mark.parametrize(
 	"interpolate, method",
-	[(False, None), (True, "linear"), (True, "cubic")],
+	[
+		(False, None),
+		(True, "linear"),
+		pytest.param(
+			True, "cubic",
+			marks=pytest.mark.skipif(
+				tuple(map(int, xr.__version__.split("."))) < (0, 16),
+				reason="'cubic' not supported for N-D interpolation.",
+			),
+		),
+	],
 )
 def test_ssusiq2023_xrda_3d(interpolate, method):
 	res = aurmod.ssusiq2023(
@@ -123,7 +133,17 @@ def test_ssusiq2023_xrda_3d(interpolate, method):
 
 @pytest.mark.parametrize(
 	"interpolate, method",
-	[(False, None), (True, "linear"), (True, "cubic")],
+	[
+		(False, None),
+		(True, "linear"),
+		pytest.param(
+			True, "cubic",
+			marks=pytest.mark.skipif(
+				tuple(map(int, xr.__version__.split("."))) < (0, 16),
+				reason="'cubic' not supported for N-D interpolation.",
+			),
+		),
+	],
 )
 def test_ssusiq2023_vec(interpolate, method):
 	res = aurmod.ssusiq2023(
