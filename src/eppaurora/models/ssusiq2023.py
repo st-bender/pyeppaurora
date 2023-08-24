@@ -28,6 +28,18 @@ COEFF_FILE = "SSUSI_IRgrid_coeffs_f17f18.nc"
 COEFF_PATH = resource_filename(__name__, path.join("data", COEFF_FILE))
 
 
+def _interp(ds, method="linear", method_non_numeric="nearest", **kwargs):
+	"""Fix `xarray` interpolation with non-numeric variables
+	"""
+	v_n = sorted(
+		filter(lambda _v: np.issubdtype(ds[_v].dtype, np.number), ds)
+	)
+	v_nn = sorted(set(ds) - set(v_n))
+	ds_n = ds[v_n].interp(method=method, **kwargs)
+	ds_nn = ds[v_nn].sel(method=method_non_numeric, **kwargs)
+	return xr.merge([ds_n, ds_nn], join="left", compat="override")
+
+
 def ssusiq2023(
 	gmlat,
 	mlt,
@@ -87,7 +99,8 @@ def ssusiq2023(
 		_ds_mp = xr.concat([_ds_m, coeff_sel, _ds_p], dim="mlt")
 		# square the standard deviation for interpolation
 		_ds_mp["beta_var"] = _ds_mp["beta_std"]**2
-		coeff_sel = _ds_mp.interp(
+		coeff_sel = _interp(
+			_ds_mp,
 			latitude=gmlat, mlt=mlt,
 			method=method,
 		)
