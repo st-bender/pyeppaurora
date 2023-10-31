@@ -1,6 +1,15 @@
 Changelog
 =========
 
+v0.3.1 (unreleased)
+-------------------
+
+### Changes
+
+- Small internal code changes in the SSUSI model
+- Documentation updates
+
+
 v0.3.0 (2023-08-24)
 -------------------
 
