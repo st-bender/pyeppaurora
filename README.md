@@ -90,6 +90,20 @@ The python module itself is named `eppaurora` and is imported as usual.
 All functions should be `numpy`-compatible and work with scalars
 and appropriately shaped arrays.
 
+### Energetic particle input in the atmosphere
+
+This module include various parametrizations that describe the
+energy dissipation of electrons and protons entering the middle
+and upper atmosphere (see [References](#references) below).
+The functions are correspondingly named
+
+- `rr1987()` for the parametrization by Roble and Ridley, 1987,
+- `fang2008()` for the parametrization described in Fang et al., 2008,
+- `fang2010()`  for the parametrization described in Fang et al., 2010, and
+- `fang2013()` for the proton parametrization by Fang et al., 2013
+
+For example, they are called like this:
+
 ```python
 >>> import eppaurora as aur
 >>> ediss = aur.rr1987(1., 1., 8e5, 5e-10)
@@ -114,6 +128,92 @@ array([[1.37708081e-49, 3.04153876e-09, 4.44256875e-07, 2.52699970e-08],
 
 ```
 
+All functions need additional input for the background atmosphere,
+the scale height and the mass density as described in the listed publications.
+These can be obtained, for example, from the `nrlmsise00` module
+<https://github.com/st-bender/pynrlmsise00>.
+Profiles can then be calculated by passing the respective scale height
+and density profiles in addition to the energy and flux.
+
+`fang1020()` and `fang2013()` are for mono-energetic particles and to
+obtain a realistic description, the results should be integrated
+over the respective energy spectrum.
+For this there are spectra functions available for Gaussian, Maxwellian,
+and power-law distribution.
+
+### Recombination rates
+
+Some atmospheric recombination rates $\alpha$ are available within
+`eppaurora.recombination` to convert the ionization rates $q$
+to electron densities $n_e$ via $q = \alpha n_e^2$.
+The recombination rates are parametrized according to altitude,
+see [References](#references).
+
+### Conductivity and conductance
+
+Estimators for the Hall and Pedersen conductivity and conductance
+are available via the `eppaurora.conductivity` module.
+It contains the approximate solution "Robinson formula" for the conductances,
+and the functions for the conductivities that need the electron density
+and a model for the magnetic field,
+see [References](#references).
+
+For example the "Robinson" conductances for an average energy `en_avg` and flux `flx`
+can be obtained by calling `SigmaH_robinson1987(<en_avg>, <flx>)`:
+and `SigmaP_robinson1987(<en_avg>, <flx>)`:
+
+```python
+>>> import eppaurora as aur
+>>> aur.SigmaH_robinson1987(10.0, 1.0)
+10.985365619753862
+>>> aur.SigmaP_robinson1987(10.0, 1.0)
+3.4482758620689653
+
+```
+
+### Empirical ionization rate models
+
+This package provides the coefficients and evaluation function
+for the SSUSI-derived ionization rate model.
+It is imported via `eppaurora.models` and the coefficients are
+available through `ssusiq2023_coeffs()`.
+
+The model itself can be evaluated with `ssusiq2023()`
+for a certain geomagnetic latitude (gmlat),
+magnetic local time (mlt), and altitude by providing the space-weather
+coefficients of Kp, PC, Ap, and the 81-day averaged F10.7 fluxes as inputs:
+`ssusiq2023(<gmlat>, <mlt>, <altitude>, [<list of index values>])`.
+Note that this returns the natural logarithm of the ionization rate,
+normalized to 1 cm⁻³ s⁻¹.
+
+Instead of a list or `numpy`-array, an `xarray.DataArray` can be used for
+the indices which will promote the coordinates to the result,
+such as an extra time dimension.
+
+```python
+>>> from eppaurora.models import ssusiq2023
+>>> ssusiq2023(65.0, 3.0, 100.0, [4.0, 10.0, 100.0, 157.0])
+<xarray.DataArray 'log_q' (dim_0: 1)>
+array([18.80679417])
+Coordinates:
+    altitude  float32 100.0
+    latitude  float32 66.6
+    mlt       float32 3.0
+Dimensions without coordinates: dim_0
+Attributes:
+    long_name:  natural logarithm of ionization rate
+    units:      log(cm-3 s-1)
+
+```
+
+Various options to use different coefficients or to interpolate
+to a finer grid exist, check the docstring of `ssusiq2023()`.
+The geomagnetic indices can be obtained, for example,
+from the `spaceweather` module
+<https://github.com/st-bender/pyspaceweather>.
+
+### Other
+
 Basic class and method documentation is accessible via `pydoc`:
 
 ```sh
@@ -123,6 +223,7 @@ $ pydoc eppaurora.conductivity
 $ pydoc eppaurora.electrons
 $ pydoc eppaurora.protons
 $ pydoc eppaurora.recombination
+$ pydoc eppaurora.models.ssusiq2023
 ```
 
 ## References
