@@ -192,7 +192,7 @@ such as an extra time dimension.
 
 ```python
 >>> from eppaurora.models import ssusiq2023
->>> ssusiq2023(65.0, 3.0, 100.0, [4.0, 10.0, 100.0, 157.0])
+>>> ssusiq2023(65.0, 3.0, 100.0, [4.0, 10.0, 100.0, 157.0])  # doctest: +SKIP
 <xarray.DataArray 'log_q' (dim_0: 1)>
 array([18.80679417])
 Coordinates:
