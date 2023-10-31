@@ -63,11 +63,11 @@ def ssusiq2023(
 		Altitude in [km]
 	sw_coeffs: array_like or `xarray.DataArray`
 		The space weather index values to use (for the requested time(s)),
-		should be of shape (N, M) with N = number of proxies, currently 5:
-		[Kp, PC, Ap, log(f10.7_81ctr_obs), log(v_plasma)].
+		should be of shape (N, M) with N = number of proxies, currently 4:
+		[Kp, PC, Ap, log(f10.7_81ctr_obs)].
 		The `xarray.DataArray` should have a dimension named "proxy" with
 		matching coordinates:
-		["Kp", "PC", "Ap", "log_f107_81ctr_obs", "log_v_plasma"]
+		["Kp", "PC", "Ap", "log_f107_81ctr_obs"]
 		All the other dimensions will be broadcasted.
 	coeff_ds: `xarray.Dataset`, optional (default: None)
 		Dataset with the model coefficients, `None` uses the packaged version.
