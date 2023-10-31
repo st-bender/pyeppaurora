@@ -8,4 +8,5 @@ dependencies:
     - ipython
     - numpy
     - numpydoc
+    - recommonmark
     - scipy
