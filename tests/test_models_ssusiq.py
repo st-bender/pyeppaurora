@@ -14,17 +14,23 @@ COEFF_DS = xr.Dataset(
 	data_vars={
 		"beta": (
 			["altitude", "latitude", "mlt", "proxy"],
-			[[[[1., 2., 3., 4., 5., 6.]]]],
+			np.tile(
+				[[[[1., 2., 3., 4., 5., 6.]]]],
+				(1, 2, 2, 1),
+			),
 		),
 		"beta_std": (
 			["altitude", "latitude", "mlt", "proxy"],
-			[[[[1., 2., 3., 4., 5., 6.]]]],
+			np.tile(
+				[[[[1., 2., 3., 4., 5., 6.]]]],
+				(1, 2, 2, 1),
+			),
 		),
 	},
 	coords={
 		"altitude": [100.],
-		"latitude": [70.2],
-		"mlt": [3.0],
+		"latitude": [70.2, 73.8],
+		"mlt": [3.0, 5.0],
 		"proxy": ["Kp", "PC", "Ap", "log_f107_81ctr_obs", "log_v_plasma", "offset"],
 	},
 )
