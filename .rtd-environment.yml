@@ -10,3 +10,4 @@ dependencies:
     - numpydoc
     - recommonmark
     - scipy
+    - sphinx_rtd_theme
