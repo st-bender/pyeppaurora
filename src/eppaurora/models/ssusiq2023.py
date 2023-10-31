@@ -42,6 +42,22 @@ def _interp(ds, method="linear", method_non_numeric="nearest", **kwargs):
 	return xr.merge([ds_n, ds_nn], join="left")
 
 
+def ssusiq2023_coeffs():
+	"""SSUSI ionization rate model coefficients
+
+	Returns the fitted ionization rate model coefficents as
+	read from the coefficient netcdf file.
+
+	Returns
+	-------
+	coeffs: `xarray.Dataset`
+		The default fitted model coefficients as read from the file.
+	"""
+	return xr.open_dataset(
+		COEFF_PATH, decode_times=False, engine="h5netcdf"
+	)
+
+
 def ssusiq2023(
 	gmlat,
 	mlt,
@@ -91,9 +107,7 @@ def ssusiq2023(
 		log(q) and var(log(q)) where q is the ionization rate in [cm⁻³ s⁻¹]
 		if `return_var` is True.
 	"""
-	coeff_ds = coeff_ds or xr.open_dataset(
-		COEFF_PATH, decode_times=False, engine="h5netcdf"
-	)
+	coeff_ds = coeff_ds or ssusiq2023_coeffs()
 	coeff_sel = coeff_ds.sel(altitude=alt)
 	if interpolate:
 		_ds_m = coeff_sel.assign_coords(mlt=coeff_sel.mlt - 24)
