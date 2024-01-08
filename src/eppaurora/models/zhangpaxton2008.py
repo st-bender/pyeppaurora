@@ -90,8 +90,8 @@ def epstein_coeffs(angle, table):
 	if (2 * nf + 1) != len(coeffs):
 		raise ValueError("Number of coefficients is inconsistent.")
 	fs = np.arange(1, nf + 1)
-	cos = np.cos(fs * angle) @ coeffs[1:nf + 1]
-	sin = np.sin(fs * angle) @ coeffs[nf + 1:2 * nf + 1]
+	cos = np.cos(fs * angle).dot(coeffs[1:nf + 1])
+	sin = np.sin(fs * angle).dot(coeffs[nf + 1:2 * nf + 1])
 	return coeffs[0] + cos + sin
 
 
