@@ -73,6 +73,7 @@ if __name__ == "__main__":
 		package_data={
 			name + ".models": [
 				"models/data/SSUSI_IRgrid_coeffs_f17f18.nc",
+				"models/data/Zhang2008.txt",
 			],
 		},
 		include_package_data=True,
