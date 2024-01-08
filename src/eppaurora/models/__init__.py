@@ -9,9 +9,12 @@
 """Empirical models for electron energy and flux and ionization rates
 
 Implements the empirical proxy-driven models for auroral electrons,
-providing the proxy driven ionizatin rate model described in [1]_.
+providing the proxy driven ionization rate model described in [1]_
+and the empirical electron energy and flux model described in [2]_.
 
 .. [1] Bender et al., in prep., 2023
+.. [2] Zhang and Paxton, JASTP, 70, 1231--1242, 2008, https://doi.org/10.1016/j.jastp.2008.03.008
 """
 
 from .ssusiq2023 import *
+from .zhangpaxton2008 import *
