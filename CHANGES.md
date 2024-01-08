@@ -1,6 +1,20 @@
 Changelog
 =========
 
+v0.3.2 (unreleased)
+-------------------
+
+### New
+
+- Includes the Zhang and Paxton 2008 model for auroral
+  electron energy and energy fluxes
+
+### Changes
+
+- CI fixes
+- Fixes for docs on `readthedocs`
+
+
 v0.3.1 (2023-10-31)
 -------------------
 
