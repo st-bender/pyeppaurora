@@ -12,7 +12,7 @@ Implements the empirical proxy-driven models for auroral electrons,
 providing the proxy driven ionization rate model described in [1]_
 and the empirical electron energy and flux model described in [2]_.
 
-.. [1] Bender et al., in prep., 2023
+.. [1] Bender et al., in prep., 2023, preprint: https://doi.org/10.48550/arXiv.2312.11130
 .. [2] Zhang and Paxton, JASTP, 70, 1231--1242, 2008, https://doi.org/10.1016/j.jastp.2008.03.008
 """
 

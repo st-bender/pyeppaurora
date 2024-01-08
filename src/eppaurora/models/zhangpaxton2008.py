@@ -11,7 +11,7 @@
 Implements the empirical Kp-driven model for auroral electrons,
 providing mean energy and energy flux as described in [1]_.
 
-.. [1] Zhang and Paxton, JASTP, 70, 1231--1242, 2008
+.. [1] Zhang and Paxton, JASTP, 70, 1231--1242, 2008, https://doi.org/10.1016/j.jastp.2008.03.008
 """
 from os import path
 from pkg_resources import resource_filename

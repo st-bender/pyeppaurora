@@ -11,7 +11,7 @@
 Implements the empirical model for auroral ionization,
 derived from SSUSI UV observations [1]_.
 
-.. [1] Bender et al., in prep., 2023
+.. [1] Bender et al., in prep., 2023, preprint: https://doi.org/10.48550/arXiv.2312.11130
 """
 from logging import warning as warn
 from os import path
