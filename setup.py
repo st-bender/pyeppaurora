@@ -78,7 +78,7 @@ if __name__ == "__main__":
 		},
 		include_package_data=True,
 		install_requires=[
-			"numpy>=1.13.0",
+			"numpy>=1.14.0",
 			"scipy>=0.9",  # LinearNDInterpolator
 		],
 		extras_require=extras_require,

@@ -65,6 +65,7 @@ def read_zp2008_coeffs(file=None, nf=6, nKp=len(KP_BINC)):
 		file or COEFF_PATH,
 		delimiter=" ",
 		dtype=None,
+		encoding="utf-8",
 		names=["name"] + COEFF_NAMES,
 	)
 	# number of coefficients per Kp bin
