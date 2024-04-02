@@ -264,6 +264,13 @@ doi: [10.1029/JA086iA01p00065](https://doi.org/10.1029/JA086iA01p00065)
 [11]: Robinson et al., J. Geophys. Res. Space Phys., 92(A3), 2565--2569, Mar. 1987,
 doi: [10.1029/JA092iA03p02565](https://doi.org/10.1029/JA092iA03p02565)  
 
+### Empirical ionization rate models
+
+[12]: Bender et al., submitted to J. Geophys. Res. Space Phys., 2023,
+preprint doi: [10.48550/arXiv.2312.11130](https://doi.org/10.48550/arXiv.2312.11130)  
+[13]: Zhang and Paxton, J. Atmos. Sol. Terr. Phys., 70(8--9), 1231--1242, June 2008,
+doi: [10.1016/j.jastp.2008.03.008](https://doi.org/10.1016/j.jastp.2008.03.008)  
+
 ## License
 
 This python interface is free software: you can redistribute it or modify
