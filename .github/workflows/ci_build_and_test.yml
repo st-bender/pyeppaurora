@@ -32,8 +32,8 @@ jobs:
             python-version: "3.x"
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/cache@v3
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
         with:
           key: ${{ runner.os}}-pip-${{ matrix.python-version }}
           path: ~/.cache/pip
@@ -44,7 +44,7 @@ jobs:
         run: |
           sudo apt-get update
       - name: Set up Python ${{ matrix.python-version }} on ${{ matrix.os }}
-        uses: MatteoH2O1999/setup-python@v1
+        uses: MatteoH2O1999/setup-python@v3
         with:
           python-version: ${{ matrix.python-version }}
           cache-build: true
@@ -90,7 +90,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Setup Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.9"
       - name: Finish coverage collection
@@ -111,9 +111,9 @@ jobs:
       # IMPORTANT: this permission is mandatory for trusted publishing
       id-token: write
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: '3.x'
     - name: Install dependencies
