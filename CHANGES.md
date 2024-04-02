@@ -9,9 +9,15 @@ v0.3.2 (unreleased)
 - Includes the Zhang and Paxton 2008 model for auroral
   electron energy and energy fluxes
 
+### Fixes
+
+- Updates the SSUSI model parameters by re-fitting with the
+  correct data time stamps
+
 ### Changes
 
 - CI fixes
+- Updates the documentation to include the model API
 - Fixes for docs on `readthedocs`
 
 
