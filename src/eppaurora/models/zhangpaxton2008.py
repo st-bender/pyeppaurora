@@ -43,7 +43,7 @@ def hemispheric_power(Kp):
 	Zhang and Paxton, 2008, Eqs. (1) and (2)
 
 	Parameters
-	-----------
+	----------
 	Kp: float or array_like
 		Geomagnetic Kp index value(s).
 
