@@ -83,8 +83,28 @@ def find_Kp_idx(Kp):
 
 
 def epstein_coeffs(angle, table):
-	r"""
-	:math:`angle = MLT * 2\pi / 24`
+	r"""Epstein coefficients from table
+
+	Returns the Epstein coefficients as read from the table,
+	ready for evaluation with :func:`epstein_eval()`.
+
+	Parameters
+	----------
+	angle: float or array_like
+		The magnetic local time hour angle: :math:`angle = \text{MLT} * 2\pi / 24`
+	table: array_like
+		Table of N harmonic (Fourier) coefficients.
+		The 4 constant offsets are in the first row, then Nx4 cosine amplitudes
+		followed by Nx4 sine amplitudes, each for the coefficients A, B, C, and D.
+
+	Returns
+	-------
+	coeffs: array_like (4,)
+		The Epstein coefficients for the MLT angle.
+
+	See Also
+	--------
+	epstein_eval
 	"""
 	coeffs = np.array(table[COEFF_NAMES].tolist())
 	nf = (len(coeffs) - 1) // 2
@@ -97,10 +117,24 @@ def epstein_coeffs(angle, table):
 
 
 def epstein_eval(x, coeffs):
-	"""Epstein function evaluated at x
+	r"""Epstein function evaluated at x
 
-	x = 90 - |Mlat|
-	coeffs = Epstein coefficients, e.g. from `epstein_coeffs()`
+	The so-called Epstein function is defined by
+
+	.. math:: E(x) = \frac{A\exp\{(x - B) / C\}}{(1 + \exp\{(x - B) / D\})^2}
+
+	Parameters
+	----------
+	x: float or array_like
+		Argument of the Epstein function, e.g. the magnetic co-latitude
+		:math:`x = 90 - |Mlat|`.
+	coeffs: array_like
+		Epstein coefficients, e.g. from :func:`epstein_coeffs()`.
+
+	Returns
+	-------
+	y: float or array_like
+		The Epstein function with coefficients as given evaluated at x.
 	"""
 	a, b, c, d = coeffs
 	loc = x - b
