@@ -61,6 +61,30 @@ def hemispheric_power(Kp):
 
 
 def read_zp2008_coeffs(file=None, nf=6, nKp=len(KP_BINC)):
+	"""Read Epstein coefficient tables from file
+
+	Parameters
+	----------
+	file: str, optional
+		The text file containing the coefficient tables, with the same layout
+		as in [ZP08]_. Defaults to the packaged coefficient file.
+	nf: int, optional
+		The number of harmonic (Fourier) terms, defaults to 6 as in [ZP08]_
+	nKp: int, optional
+		The number of Kp bins, defaults to 6 as in [ZP08]_
+
+	Returns
+	-------
+	Q0_table, Em_table: tuple of ``numpy.recarray``
+		The tables for the total energy flux Q0 and the electron mean energy Em,
+		the row names indicate the frequency and the columns the Epstein
+		parameters A, B, C, D.
+
+	References
+	----------
+	.. [ZP08] Zhang and Paxton, JASTP, 70, 1231--1242, 2008,
+		https://doi.org/10.1016/j.jastp.2008.03.008
+	"""
 	fdata = np.genfromtxt(
 		file or COEFF_PATH,
 		delimiter=" ",
