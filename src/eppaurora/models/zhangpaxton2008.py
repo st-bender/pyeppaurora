@@ -166,7 +166,12 @@ def epstein_eval(x, coeffs):
 
 
 def zp2008(mlat, mlt, Kp, Q0table=None, Emtable=None):
-	u"""
+	u"""Electron total energy flux and mean energy model
+
+	Implements the model algorithm as given in Appendix A of [ZP08]_.
+	Defaults to using the packaged coefficients taken from that reference,
+	but custom tables for the Q0 and Em Fourier coefficients can be provided.
+
 	Parameters
 	----------
 	mlat: float
@@ -187,6 +192,11 @@ def zp2008(mlat, mlt, Kp, Q0table=None, Emtable=None):
 	(Q0, Em): tuple
 		Electron energy flux Q0 in [mW m⁻²] (or [erg s⁻¹ cm⁻²]),
 		and electron mean energy in [keV].
+
+	References
+	----------
+	.. [ZP08] Zhang and Paxton, JASTP, 70, 1231--1242, 2008,
+		https://doi.org/10.1016/j.jastp.2008.03.008
 	"""
 	if (Q0table is None) or (Emtable is None):
 		Q0t, Emt = read_zp2008_coeffs()
