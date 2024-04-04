@@ -190,7 +190,7 @@ def zp2008(mlat, mlt, Kp, Q0table=None, Emtable=None):
 	Returns
 	-------
 	(Q0, Em): tuple
-		Electron energy flux Q0 in [mW m⁻²] (or [erg s⁻¹ cm⁻²]),
+		Electron energy flux Q0 in [mW m⁻²] (= [erg s⁻¹ cm⁻²]),
 		and electron mean energy in [keV].
 
 	References
