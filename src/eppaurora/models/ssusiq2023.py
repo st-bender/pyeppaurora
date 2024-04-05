@@ -42,11 +42,16 @@ def _interp(ds, method="linear", method_non_numeric="nearest", **kwargs):
 	return xr.merge([ds_n, ds_nn], join="left")
 
 
-def ssusiq2023_coeffs():
+def ssusiq2023_coeffs(file=None):
 	"""SSUSI ionization rate model coefficients
 
 	Returns the fitted ionization rate model coefficents as
 	read from the coefficient netcdf file.
+
+	Parameters
+	----------
+	file: str, optional
+		The coefficient file, defaults to the packaged coefficients.
 
 	Returns
 	-------
@@ -54,7 +59,7 @@ def ssusiq2023_coeffs():
 		The default fitted model coefficients as read from the file.
 	"""
 	return xr.open_dataset(
-		COEFF_PATH, decode_times=False, engine="h5netcdf"
+		file or COEFF_PATH, decode_times=False, engine="h5netcdf"
 	)
 
 
