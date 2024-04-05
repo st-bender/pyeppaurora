@@ -171,10 +171,33 @@ and `SigmaP_robinson1987(<en_avg>, <flx>)`:
 
 ```
 
-### Empirical ionization rate models
+### Empirical electron flux and ionization rate models
 
-This package provides the coefficients and evaluation function
-for the SSUSI-derived ionization rate model.
+The extra module `[models]` contains empirical models for the
+electron energy flux and mean energy as described in [13],
+and the empirical auroral ionization rate model as described in [12].
+These models can be installed with
+
+```sh
+pip install eppaurora[models]
+
+```
+
+The model by Zhang and Paxton [13] can be used by importing
+`eppaurora.models.zhangpaxton2008`. The main model interface is
+called `zp2008()` and is also available in the `eppaurora.models` namespace.
+Providing the magnetic latitude, magnetic local time, and the Kp index,
+this returns the total electron energy flux and the electron mean energy:
+
+```python
+>>> from eppaurora.models import zp2008
+>>> zp2008(65, 3, 2.0)  # mlat, mlt, Kp
+(1.7750166408085015, 3.417755823709314)
+
+```
+
+This package also provides the coefficients and evaluation function
+for the SSUSI-derived ionization rate model [12].
 It is imported via `eppaurora.models` and the coefficients are
 available through `ssusiq2023_coeffs()`.
 
@@ -224,6 +247,7 @@ $ pydoc eppaurora.electrons
 $ pydoc eppaurora.protons
 $ pydoc eppaurora.recombination
 $ pydoc eppaurora.models.ssusiq2023
+$ pydoc eppaurora.models.zhangpaxton2008
 ```
 
 ## References
