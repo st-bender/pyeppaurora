@@ -20,7 +20,7 @@ eppaurora.models.zhangpaxton2008
 Module contents
 ---------------
 
-.. automodule:: eppaurora
+.. automodule:: eppaurora.models
    :members:
    :undoc-members:
    :show-inheritance:
