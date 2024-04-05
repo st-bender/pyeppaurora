@@ -22,6 +22,7 @@ import xarray as xr
 
 __all__ = [
 	"ssusiq2023",
+	"ssusiq2023_coeffs",
 ]
 
 COEFF_FILE = "SSUSI_IRgrid_coeffs_f17f18.nc"
