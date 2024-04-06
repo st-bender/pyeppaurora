@@ -96,6 +96,7 @@ html_context = dict(
     github_version="master",
     conf_py_path="/docs/",
 )
+html_extra_path = ["../LICENSE"]
 # Switch to old behavior with html4, for a good display of references,
 # as described in https://github.com/sphinx-doc/sphinx/issues/6705
 # html4_writer = True
