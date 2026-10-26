@@ -106,6 +106,8 @@ For example, they are called like this:
 
 ```python
 >>> import eppaurora as aur
+>>> from numpy import set_printoptions
+>>> set_printoptions(legacy="1.25")
 >>> ediss = aur.rr1987(1., 1., 8e5, 5e-10)
 >>> ediss
 3.3693621076457477e-10
