@@ -13,6 +13,11 @@ as well as variants describing a normalized energy flux.
 """
 
 import numpy as np
+try:
+	# numpy >= 2.4
+	from numpy import trapezoid as trapz
+except ImportError:
+	from numpy import trapz
 
 __all__ = [
 	"exp_general",
@@ -411,7 +416,7 @@ def ediss_spec_int(
 		rho[..., None],
 		**func_kws
 	)
-	return np.trapz(ediss * ens, ens, axis=axis)
+	return trapz(ediss * ens, ens, axis=axis)
 
 
 def ediss_specfun_int(
