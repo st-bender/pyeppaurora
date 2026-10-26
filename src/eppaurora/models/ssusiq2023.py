@@ -15,10 +15,11 @@ derived from SSUSI UV observations [SB23]_.
 """
 from logging import warning as warn
 from os import path
-from pkg_resources import resource_filename
 
 import numpy as np
 import xarray as xr
+
+from .compat import resource_filepath
 
 __all__ = [
 	"ssusiq2023",
@@ -26,7 +27,7 @@ __all__ = [
 ]
 
 COEFF_FILE = "SSUSI_IRgrid_coeffs_f17f18.nc"
-COEFF_PATH = resource_filename(__name__, path.join("data", COEFF_FILE))
+COEFF_PATH = resource_filepath(COEFF_FILE, subdir="data")
 
 
 def _interp(ds, method="linear", method_non_numeric="nearest", **kwargs):

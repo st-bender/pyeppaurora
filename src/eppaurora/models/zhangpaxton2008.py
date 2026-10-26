@@ -15,9 +15,10 @@ providing mean energy and energy flux as described in [ZP08]_.
 	https://doi.org/10.1016/j.jastp.2008.03.008
 """
 from os import path
-from pkg_resources import resource_filename
 
 import numpy as np
+
+from .compat import resource_filepath
 
 __all__ = [
 	"epstein_coeffs",
@@ -28,7 +29,7 @@ __all__ = [
 ]
 
 COEFF_FILE = "Zhang2008.txt"
-COEFF_PATH = resource_filename(__name__, path.join("data", COEFF_FILE))
+COEFF_PATH = resource_filepath(COEFF_FILE, subdir="data")
 COEFF_NAMES = ["A", "B", "C", "D"]
 
 # Kp_model bin edges and centres as in Zhang and Paxton, 2008
