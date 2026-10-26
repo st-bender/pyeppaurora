@@ -111,13 +111,10 @@ def berger1974(
 	scipy.interpolate.Rbf
 	"""
 	energy = np.atleast_1d(np.asarray(energy, dtype=float))
-	ens = np.asarray(ens) or np.asarray(E_BR)
-	zm_p_en = np.asarray(zm_p_en) or np.asarray(Z_BR)
+	ens = np.asarray(ens) if ens is not None else np.asarray(E_BR)
+	zm_p_en = np.asarray(zm_p_en) if zm_p_en is not None else np.asarray(Z_BR)
 
-	coeffs = (
-		np.array(coeffs, copy=fillna is not None)
-		or np.array(A_BR, copy=fillna is not None)
-	)
+	coeffs = np.asarray(coeffs) if coeffs is not None else np.asarray(A_BR)
 	nans = np.isnan(coeffs)
 	if fillna is not None:
 		coeffs[nans] = fillna
@@ -134,7 +131,7 @@ def berger1974(
 		for _j, _z in enumerate(zm_p_en)
 		if not nans[_i, _j]
 	]
-	pts = np.array(pts, copy=False)
+	pts = np.asarray(pts)
 
 	if log3:
 		enp = np.log(enp)
