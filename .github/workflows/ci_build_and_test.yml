@@ -64,6 +64,8 @@ jobs:
       - name: Install package
         run: |
           pip install -e ".[all]"
+        env:
+          PIP_PREFER_BINARY: true
       - run: pip list
       - name: Test
         run: |
