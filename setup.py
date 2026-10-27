@@ -9,7 +9,7 @@ meta_path = path.join("src", name, "__init__.py")
 here = path.abspath(path.dirname(__file__))
 
 extras_require = {
-	"models": ["h5netcdf", "xarray"],
+	"models": ["h5netcdf", "h5py", "xarray"],
 	"tests": ["pytest"],
 }
 extras_require["all"] = sorted(
