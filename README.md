@@ -198,8 +198,8 @@ this returns the total electron energy flux and the electron mean energy:
 
 ```python
 >>> from eppaurora.models import zp2008
->>> zp2008(65, 3, 2.0)  # mlat, mlt, Kp
-(1.7750166408085015, 3.417755823709314)
+>>> zp2008(65, 3, 2.0)  # (gmlat, mlt, Kp -> Q0, <E>) doctest: +ELLIPSIS
+(1.7750166408085..., 3.417755823709...)
 
 ```
 
