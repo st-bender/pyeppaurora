@@ -19,10 +19,10 @@ jobs:
         python-version: ["2.7", "3.7", "3.8", "3.9", "3.10", "3.11", "3.12"]
         include:
           - name: py35
-            os: ubuntu-20.04
+            os: ubuntu-22.04
             python-version: "3.5"
           - name: py36
-            os: ubuntu-20.04
+            os: ubuntu-22.04
             python-version: "3.6"
           - name: macos
             os: macos-latest
