@@ -92,6 +92,13 @@ and appropriately shaped arrays.
 
 ### Energetic particle input in the atmosphere
 
+```python
+>>> # set up print options for doctests (safe to ignore)
+>>> from numpy import set_printoptions, __version__
+>>> if int(__version__[0]) > 1: set_printoptions(legacy="1.25")
+
+```
+
 This module include various parametrizations that describe the
 energy dissipation of electrons and protons entering the middle
 and upper atmosphere (see [References](#references) below).
@@ -106,8 +113,6 @@ For example, they are called like this:
 
 ```python
 >>> import eppaurora as aur
->>> from numpy import set_printoptions
->>> set_printoptions(legacy="1.25")
 >>> ediss = aur.rr1987(1., 1., 8e5, 5e-10)
 >>> ediss
 3.3693621076457477e-10
